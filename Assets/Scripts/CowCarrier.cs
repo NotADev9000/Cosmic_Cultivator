@@ -30,16 +30,20 @@ public class CowCarrier : MonoBehaviour
             ResetChildCartPositions();
         }
     }
+    [Header("Movement")]
     [SerializeField] private CardinalDirection moveDirection;
     [SerializeField] private bool isMoving = false;
     [SerializeField] private int moveSpeed = 5;
+    private Vector3 moveDirectionVector;
 
+    [Header("Carts")]
+    [Tooltip("Size of the gap between Carrier and Cart")]
     [SerializeField] private float cartOffset = 1.2f;
+    [Tooltip("How far last cart should be offscreen to be considered at 'end of path'")]
     [SerializeField] private float cartOffscreenThreshold = 0.1f;
     [SerializeField] private Cart cartPrefab;
-
     private Cart[] childCarts = Array.Empty<Cart>();
-    private Vector3 moveDirectionVector;
+
 
     private void OnEnable()
     {

@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
 
+    [Header("Timer")]
     [SerializeField] private float intervalTimer = 2f;
     private float currentTimer;
     public event EventHandler OnIntervalTimerDepleted;
@@ -30,7 +31,6 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        //print(currentTimer + "\n=========");
         if (currentTimer <= 0)
         {
             OnIntervalTimerDepleted?.Invoke(this, EventArgs.Empty);

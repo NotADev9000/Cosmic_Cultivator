@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int moveSpeed = 10;
-    [SerializeField] private float laserRadius = 3f;
-
     public static Player Instance { get; private set; }
     private PlayerActions playerActions;
+
+    [Header("Movement")]
+    [SerializeField] private int moveSpeed = 10;
+
+    [Header("Laser")]
+    [SerializeField] private float laserRadius = 3f;
     public event Action<Collider2D> OnLaserHitAction;
 
     private void Awake()

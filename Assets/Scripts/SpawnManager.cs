@@ -6,12 +6,12 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { get; private set; }
 
-    // Object Pooling
+    [Header("Object Pooling")]
     [SerializeField] private GameObject prefabToPool;
     [SerializeField] private int numObjectsToPool = 10;
     private Queue<GameObject> objectPool = new Queue<GameObject>();
 
-    // Wave Positioning
+    [Header("Spawn Position")]
     [SerializeField] private Transform spawnPositionsParent;
     private int lastSpawnPositionIndex = -1; // index of last spawn position used. -1 if no spawn positions have been used
 
