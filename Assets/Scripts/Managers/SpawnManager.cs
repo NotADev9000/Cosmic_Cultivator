@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         InstantiatePoolObjects();
-        WaveManager.Instance.OnIntervalTimerDepleted += WaveManager_OnIntervalTimerDepleted;
+        Events.OnWaveIntervalTimerDepleted += WaveManager_OnIntervalTimerDepleted;
     }
 
     private void InstantiatePoolObjects()

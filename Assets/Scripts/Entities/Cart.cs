@@ -23,17 +23,22 @@ public class Cart : MonoBehaviour
 
     private void OnDisable()
     {
+        RemoveLaserHitListener();
+    }
+
+    private void RemoveLaserHitListener()
+    {
         Player.Instance.OnLaserHitAction -= Player_OnLaserHitCheck;
     }
 
-    private void Player_OnLaserHitCheck(Collider2D obj)
+    private void Player_OnLaserHitCheck(Collider2D laserCollider)
     {
-        if (obj == boxCollider)
+        if (laserCollider == boxCollider)
         {
             cartVisual.color = Color.magenta;
-
             boxCollider.enabled = false;
-            Player.Instance.OnLaserHitAction -= Player_OnLaserHitCheck;
+            RemoveLaserHitListener();
+            Events.CartHit();
         }
     }
 }

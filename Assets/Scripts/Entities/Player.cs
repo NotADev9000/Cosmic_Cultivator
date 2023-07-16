@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,6 +11,8 @@ public class Player : MonoBehaviour
 
     [Header("Laser")]
     [SerializeField] private float laserRadius = 3f;
+
+    // Events
     public event Action<Collider2D> OnLaserHitAction;
 
     private void Awake()
@@ -76,7 +76,6 @@ public class Player : MonoBehaviour
 
     private void Laser_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        print("FIRED LASER");
         Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, laserRadius);
         OnLaserHitAction?.Invoke(hitCollider);
     }

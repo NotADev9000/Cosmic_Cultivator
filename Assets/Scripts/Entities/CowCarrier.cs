@@ -107,7 +107,6 @@ public class CowCarrier : MonoBehaviour
     {
         if (HasReachedEndOfPath())
         {
-            print(Camera.main.WorldToViewportPoint(GetLastChildCart().transform.position).x);
             OnEndOfPath();
         }
     }
