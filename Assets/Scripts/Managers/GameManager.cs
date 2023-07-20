@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateTimer();
+    }
+
+    //--------------------
+    #region Timer
+
+    private void UpdateTimer()
+    {
         if (gameTimer <= 0)
         {
             WaveActive = false;
@@ -37,6 +45,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Score
+
     private void IncreaseScore()
     {
         score++;
@@ -47,6 +61,9 @@ public class GameManager : MonoBehaviour
     {
         IncreaseScore();
     }
+
+    #endregion
+    //--------------------
 
     private void CreateSingleton()
     {

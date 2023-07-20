@@ -19,9 +19,11 @@ public class CowCarrier : MonoBehaviour
                     break;
                 case CardinalDirection.Left:
                     moveDirectionVector = Vector3.left;
+                    spriteRenderer.flipX = false;
                     break;
                 case CardinalDirection.Right:
                     moveDirectionVector = Vector3.right;
+                    spriteRenderer.flipX = true;
                     break;
                 default:
                     moveDirectionVector = Vector3.zero;
@@ -44,6 +46,8 @@ public class CowCarrier : MonoBehaviour
     [SerializeField] private Cart cartPrefab;
     private Cart[] childCarts = Array.Empty<Cart>();
 
+    // Sprite
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private void OnEnable()
     {
