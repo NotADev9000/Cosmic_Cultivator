@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private int moveSpeed = 10;
+    public Vector2 MoveDirection { get; private set; }
 
     [Header("Laser")]
     [SerializeField] private float laserRadius = 3f;
@@ -36,10 +37,10 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector2 moveDirection = GetMovementVectorNormalized();
+        MoveDirection = GetMovementVectorNormalized();
         float moveDistance = moveSpeed * Time.deltaTime;
 
-        transform.position += (Vector3)moveDirection * moveDistance;
+        transform.position += (Vector3)MoveDirection * moveDistance;
     }
 
     private void ClampToScreen()

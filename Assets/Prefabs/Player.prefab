@@ -94,6 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5959320902426160394}
   - component: {fileID: 542342699824339830}
+  - component: {fileID: 7963893879332539462}
+  - component: {fileID: 3548434334215631500}
   m_Layer: 0
   m_Name: Visual_Alien
   m_TagString: Untagged
@@ -168,6 +170,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7963893879332539462
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322207437393446213}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39402214e5019524c9f11f306e93242d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3548434334215631500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322207437393446213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b410b178cb34b1b4a8dd38c2dcc377f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7320573758177181446}
+  rotateBy: 20
+  rotateSpeed: 5
 --- !u!1 &6496405761567148113
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +238,7 @@ Transform:
   - {fileID: 7272584301004157071}
   - {fileID: 5959320902426160394}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7320573758177181446
 MonoBehaviour:
@@ -214,5 +252,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b196fd6d4c421e4a9422f788f4b2c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  laserRadius: 0.6
+  moveSpeed: 5
+  laserRadius: 0.54

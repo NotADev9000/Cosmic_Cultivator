@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        LimitFPS();
         CreateSingleton();
         Events.OnIncreaseScore += Events_OnIncreaseScore;
     }
@@ -64,6 +65,12 @@ public class GameManager : MonoBehaviour
 
     #endregion
     //--------------------
+
+    private void LimitFPS()
+    {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+    }
 
     private void CreateSingleton()
     {

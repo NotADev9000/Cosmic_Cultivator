@@ -51,7 +51,6 @@ public class CowCarrier : MonoBehaviour
 
     private void OnEnable()
     {
-        print(childCarts.Length);
         for (int i = 0; i < 3; i++)
         {
             Instantiate(cartPrefab, transform);
@@ -137,6 +136,7 @@ public class CowCarrier : MonoBehaviour
 
     private void OnValidate()
     {
+        childCarts = GetComponentsInChildren<Cart>();
         MoveDirection = moveDirection;
     }
 
