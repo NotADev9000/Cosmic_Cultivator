@@ -8,12 +8,10 @@ public static class Events
 
     // GameManager
     public static event EventHandler OnIncreaseScore;
+    public static event Action<int> OnScoreChanged;
 
     // WaveManager
     public static event EventHandler OnWaveIntervalTimerDepleted;
-    
-    // Entities
-    //public static event Action<Collider2D> OnLaserHitAction;
 
     #endregion
     //--------------------
@@ -27,10 +25,11 @@ public static class Events
         OnIncreaseScore?.Invoke(null, EventArgs.Empty);
     }
 
-    //public static void LaserHit(Collider2D colliderHit)
-    //{
-    //    OnLaserHitAction?.Invoke(colliderHit);
-    //}
+    // GameManager
+    public static void ScoreChanged(int score)
+    {
+        OnScoreChanged?.Invoke(score);
+    }
 
     // WaveManager
     public static void WaveIntervalTimerDepleted()

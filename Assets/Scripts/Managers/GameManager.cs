@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private void IncreaseScore()
     {
         score++;
-        print("Score: " + score.ToString());
+        Events.ScoreChanged(score);
     }
 
     private void Events_OnIncreaseScore(object sender, EventArgs e)
