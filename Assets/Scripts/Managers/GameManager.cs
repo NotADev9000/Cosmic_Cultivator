@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         else
         {
             int time = Mathf.CeilToInt(gameTimer);
-            print(time.ToString());
+            print("Time: " + time.ToString());
 
             gameTimer -= Time.deltaTime;
         }
