@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public static class Events
 {
@@ -9,6 +10,7 @@ public static class Events
     // GameManager
     public static event EventHandler OnIncreaseScore;
     public static event Action<int> OnScoreChanged;
+    public static event Action<float> OnTimerChanged;
 
     // WaveManager
     public static event EventHandler OnWaveIntervalTimerDepleted;
@@ -29,6 +31,11 @@ public static class Events
     public static void ScoreChanged(int score)
     {
         OnScoreChanged?.Invoke(score);
+    }
+
+    public static void TimerChanged(float timer)
+    {
+        OnTimerChanged?.Invoke(timer);
     }
 
     // WaveManager
