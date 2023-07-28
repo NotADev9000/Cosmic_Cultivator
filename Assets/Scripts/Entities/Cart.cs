@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cart : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer cartVisual;
+    [SerializeField] private GameObject cowVisual;
     [SerializeField] private float cartGap = 0.2f;
 
     private Collider2D boxCollider;
@@ -35,10 +36,10 @@ public class Cart : MonoBehaviour
     {
         if (laserCollider == boxCollider)
         {
-            cartVisual.color = Color.magenta;
+            Events.CartHit();
+            cowVisual.SetActive(true);
             boxCollider.enabled = false;
             RemoveLaserHitListener();
-            Events.CartHit();
         }
     }
 }

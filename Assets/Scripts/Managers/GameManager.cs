@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         if (gameTimer <= 0)
         {
             WaveActive = false;
+            Time.timeScale = 0;
         }
         else
         {
