@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2909017102292319953}
   - component: {fileID: 5688835842132602482}
   - component: {fileID: 2084694299529439953}
+  - component: {fileID: 68188796793840797}
   m_Layer: 0
   m_Name: Visual_Cow
   m_TagString: Untagged
@@ -106,6 +107,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &68188796793840797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438039084307362854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8578408b1c5aca45a5cb956ca67e2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationToPlay: 
+  boolParameterName: Mirror_Idle
 --- !u!1 &4334252178907506245
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationToPlay: Base Layer.Idle
+  boolParameterName: 
 --- !u!1 &5077517706599428563
 GameObject:
   m_ObjectHideFlags: 0
