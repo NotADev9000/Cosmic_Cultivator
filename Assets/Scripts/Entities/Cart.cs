@@ -19,7 +19,7 @@ public class Cart : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.Instance.OnLaserHitAction += Player_OnLaserHitCheck;
+        Player.Instance.OnLaserShotAction += Player_OnLaserShotCheck;
     }
 
     private void OnDisable()
@@ -29,10 +29,10 @@ public class Cart : MonoBehaviour
 
     private void RemoveLaserHitListener()
     {
-        Player.Instance.OnLaserHitAction -= Player_OnLaserHitCheck;
+        Player.Instance.OnLaserShotAction -= Player_OnLaserShotCheck;
     }
 
-    private void Player_OnLaserHitCheck(Collider2D laserCollider)
+    private void Player_OnLaserShotCheck(Collider2D laserCollider)
     {
         if (laserCollider == boxCollider)
         {
