@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792d9cfdd6ce8cf449b740e93168081f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTimer: 30
+  gameTimer: 999
 --- !u!4 &1264752471
 Transform:
   m_ObjectHideFlags: 0
@@ -1345,6 +1345,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 415851218398516074, guid: e9840a31b85e6524cb8bd7f0dbef1bfa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275216706992592811, guid: e9840a31b85e6524cb8bd7f0dbef1bfa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6496405761567148113, guid: e9840a31b85e6524cb8bd7f0dbef1bfa, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1359,7 +1367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6658782906656371163, guid: e9840a31b85e6524cb8bd7f0dbef1bfa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6658782906656371163, guid: e9840a31b85e6524cb8bd7f0dbef1bfa, type: 3}
       propertyPath: m_LocalPosition.z
