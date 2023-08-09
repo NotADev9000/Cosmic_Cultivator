@@ -7,7 +7,7 @@ public class Cart_Audio : MonoBehaviour
     [Header("Cow")]
     [SerializeField] private List<AudioClip> cowClipsList = new List<AudioClip>();
 
-    [Header("Cart")]
+    [Header("Wagon")]
     [SerializeField] private AudioClip impactClip;
 
     private AudioSource audioSource;

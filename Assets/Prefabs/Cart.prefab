@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &856136940061716679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4006249799201762065}
+  - component: {fileID: 171816809797900682}
+  - component: {fileID: 1786802919811893440}
+  m_Layer: 0
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4006249799201762065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856136940061716679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2326657231715795300}
+  - {fileID: 2909017102292319953}
+  m_Father: {fileID: 3409031059090422962}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171816809797900682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856136940061716679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79422bc82b8ec0f45a8ef930c1c63e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cowChild: {fileID: 3438039084307362854}
+--- !u!95 &1786802919811893440
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856136940061716679}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b45917d51ad5d0840b6a70146ad93645, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3438039084307362854
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,10 +79,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2909017102292319953}
   - component: {fileID: 5688835842132602482}
-  - component: {fileID: 2084694299529439953}
-  - component: {fileID: 68188796793840797}
   m_Layer: 0
-  m_Name: Visual_Cow
+  m_Name: Cow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,12 +93,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3438039084307362854}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.738, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3409031059090422962}
+  m_Father: {fileID: 4006249799201762065}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5688835842132602482
@@ -86,41 +153,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2084694299529439953
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3438039084307362854}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f575aa809584a894d9ae0259b37456d4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &68188796793840797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3438039084307362854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8578408b1c5aca45a5cb956ca67e2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationToPlay: 
-  boolParameterName: Mirror_Idle
 --- !u!1 &4334252178907506245
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,10 +163,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2326657231715795300}
   - component: {fileID: 1437590358407606318}
-  - component: {fileID: 8538219352191808813}
-  - component: {fileID: 1650053871079629573}
   m_Layer: 0
-  m_Name: Visual_Cart
+  m_Name: Wagon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,12 +177,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4334252178907506245}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3409031059090422962}
+  m_Father: {fileID: 4006249799201762065}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1437590358407606318
@@ -207,41 +237,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!95 &8538219352191808813
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4334252178907506245}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b45917d51ad5d0840b6a70146ad93645, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1650053871079629573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4334252178907506245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8578408b1c5aca45a5cb956ca67e2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationToPlay: Base Layer.Idle
-  boolParameterName: 
 --- !u!1 &5077517706599428563
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,8 +267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2326657231715795300}
-  - {fileID: 2909017102292319953}
+  - {fileID: 4006249799201762065}
   - {fileID: 2346222270250130059}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -290,9 +284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64fbc4e6dd03014886c27c13cbd629e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cartVisual: {fileID: 1437590358407606318}
+  cartAnimator: {fileID: 171816809797900682}
+  wagonVisual: {fileID: 1437590358407606318}
   cartGap: 0.05
-  cowVisual: {fileID: 3438039084307362854}
   cartAudio: {fileID: 1763611021836327811}
 --- !u!61 &1439178857423740391
 BoxCollider2D:
@@ -388,6 +382,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 128c50e301a4f45468207e5c0aa736bb, type: 3}
   - {fileID: 8300000, guid: ab41b0792176e0941a028a6e345c3f3c, type: 3}
   - {fileID: 8300000, guid: 2c82141f3fa43e044b35d8d11f0dcf54, type: 3}
+  impactClip: {fileID: 0}
 --- !u!82 &9176067651912996177
 AudioSource:
   m_ObjectHideFlags: 0

@@ -5,9 +5,13 @@ using UnityEngine;
 public class Cart : MonoBehaviour
 {
     [Header("Visuals")]
-    [SerializeField] private SpriteRenderer cartVisual;
+    [SerializeField] private Cart_Animator cartAnimator;
+    [SerializeField] private SpriteRenderer wagonVisual;
+
+    [Space(5)]
+
+    [Tooltip("Distance between each cart behind a tractor")]
     [SerializeField] private float cartGap = 0.2f;
-    [SerializeField] private GameObject cowVisual;
 
     [Space(10)]
 
@@ -15,8 +19,8 @@ public class Cart : MonoBehaviour
     [SerializeField] private Cart_Audio cartAudio;
 
     private Collider2D boxCollider;
-    public float CartWidth { get { return cartVisual.bounds.size.x + cartGap; } }
-    public float CartHeight { get { return cartVisual.bounds.size.y + cartGap; } }
+    public float CartWidth { get { return wagonVisual.bounds.size.x + cartGap; } }
+    public float CartHeight { get { return wagonVisual.bounds.size.y + cartGap; } }
 
     private void Awake()
     {
@@ -33,20 +37,31 @@ public class Cart : MonoBehaviour
         RemoveLaserHitListener();
     }
 
-    private void RemoveLaserHitListener()
-    {
-        Player.Instance.OnLaserShotAction -= Player_OnLaserShotCheck;
-    }
 
     private void Player_OnLaserShotCheck(Collider2D laserCollider)
     {
         if (laserCollider == boxCollider)
         {
             Events.CartHit();
-            cowVisual.SetActive(true);
-            cartAudio.OnCowAppear();
-            boxCollider.enabled = false;
+            DoAudioAndVisuals();
+            RemoveTarget();
             RemoveLaserHitListener();
         }
+    }
+
+    private void DoAudioAndVisuals()
+    {
+        cartAnimator.OnLaserHit();
+        cartAudio.OnCowAppear();
+    }
+
+    private void RemoveTarget()
+    {
+        boxCollider.enabled = false;
+    }
+
+    private void RemoveLaserHitListener()
+    {
+        Player.Instance.OnLaserShotAction -= Player_OnLaserShotCheck;
     }
 }
