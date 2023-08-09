@@ -5,27 +5,36 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Score")]
     [SerializeField] private TMP_Text scoreField;
-    [SerializeField] private TMP_Text timerField;
 
     [Space(10)]
+
+    [Header("Timer")]
+    [SerializeField] private TMP_Text timerField;
+    [SerializeField] private Animator timerAnimator;
+
+    [Space(5)]
 
     [Tooltip("Animates the timer when it is <= this value")]
     [SerializeField] private int pulseTimerAt = 5;
 
-    private Animator animator;
-    private const string ANIMATION_PULSE = "Pulse";
+    private const string ANIMATION_TRIGGER_PULSE = "Pulse";
 
     int lastTimeDisplayed = 0;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         Events.OnScoreChanged += Events_OnScoreChanged;
         Events.OnTimerChanged += Events_OnTimerChanged;
     }
 
     private void Events_OnScoreChanged(int score)
+    {
+        SetScoreText(score);
+    }
+
+    private void SetScoreText(int score)
     {
         scoreField.text = score.ToString();
     }
@@ -51,7 +60,7 @@ public class UIManager : MonoBehaviour
     {
         if (time <= pulseTimerAt)
         {
-            animator.SetTrigger(ANIMATION_PULSE);
+            timerAnimator.SetTrigger(ANIMATION_TRIGGER_PULSE);
         }
     }
 }

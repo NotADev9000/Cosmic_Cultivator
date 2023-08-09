@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Cart : MonoBehaviour
 {
+    [Header("Visuals")]
     [SerializeField] private SpriteRenderer cartVisual;
-    [SerializeField] private GameObject cowVisual;
     [SerializeField] private float cartGap = 0.2f;
+    [SerializeField] private GameObject cowVisual;
+
+    [Space(10)]
+
+    [Header("Audio")]
+    [SerializeField] private Cart_Audio cartAudio;
 
     private Collider2D boxCollider;
     public float CartWidth { get { return cartVisual.bounds.size.x + cartGap; } }
@@ -38,6 +44,7 @@ public class Cart : MonoBehaviour
         {
             Events.CartHit();
             cowVisual.SetActive(true);
+            cartAudio.OnCowAppear();
             boxCollider.enabled = false;
             RemoveLaserHitListener();
         }

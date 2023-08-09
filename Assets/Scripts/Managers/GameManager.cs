@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public bool WaveActive { get; private set; } = false;
     [SerializeField] private float gameTimer = 60f;
-    private int score = 0;
+    public int Score { get; private set; } = 0;
 
     private void Awake()
     {
@@ -54,8 +54,8 @@ public class GameManager : MonoBehaviour
 
     private void IncreaseScore()
     {
-        score++;
-        Events.ScoreChanged(score);
+        Score++;
+        Events.ScoreChanged(Score);
     }
 
     private void Events_OnIncreaseScore(object sender, EventArgs e)

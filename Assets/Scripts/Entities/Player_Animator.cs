@@ -23,6 +23,11 @@ public class Player_Animator : MonoBehaviour
 
     private void Update()
     {
+        RotateAlien();
+    }
+
+    private void RotateAlien()
+    {
         float targetAngle = -rotateBy * Player.Instance.MoveDirection.x;
 
         // Calculate the target rotation as a quaternion
