@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -32,15 +33,24 @@ public class Player : MonoBehaviour
         ClampToScreen();
     }
 
+    private void OnDestroy()
+    {
+        playerActions.Player_Map.Laser.performed -= Laser_performed;
+        playerActions.Player_Map.RestartGame.performed -= RestartGame_performed;
+    }
+
     //--------------------
     #region Movement
 
     private void MovePlayer()
     {
-        MoveDirection = GetMovementVectorNormalized();
-        float moveDistance = moveSpeed * Time.deltaTime;
+        if (GameManager.Instance.IsGameActive)
+        {
+            MoveDirection = GetMovementVectorNormalized();
+            float moveDistance = moveSpeed * Time.deltaTime;
 
-        transform.position += (Vector3)MoveDirection * moveDistance;
+            transform.position += (Vector3)MoveDirection * moveDistance;
+        }
     }
 
     private void ClampToScreen()
@@ -66,6 +76,25 @@ public class Player : MonoBehaviour
         playerActions = new PlayerActions();
         playerActions.Player_Map.Enable();
         playerActions.Player_Map.Laser.performed += Laser_performed;
+        playerActions.Player_Map.RestartGame.performed += RestartGame_performed;
+    }
+
+    private void Laser_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (GameManager.Instance.IsGameActive)
+        {
+            Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, laserRadius);
+            OnLaserShotAction?.Invoke(hitCollider);
+        }
+    }
+
+    private void RestartGame_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!GameManager.Instance.IsGameActive)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     private Vector2 GetMovementVectorNormalized()
@@ -73,12 +102,6 @@ public class Player : MonoBehaviour
         Vector2 inputVector = playerActions.Player_Map.Movement.ReadValue<Vector2>();
         inputVector.Normalize();
         return inputVector;
-    }
-
-    private void Laser_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, laserRadius);
-        OnLaserShotAction?.Invoke(hitCollider);
     }
 
     #endregion

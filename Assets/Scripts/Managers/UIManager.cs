@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour
     [Tooltip("Animates the timer when it is <= this value")]
     [SerializeField] private int pulseTimerAt = 5;
 
+    [Space(10)]
+
+    [Header("Game Over")]
+    [SerializeField] private TMP_Text gameOverField;
+
     private const string ANIMATION_TRIGGER_PULSE = "Pulse";
 
     int lastTimeDisplayed = 0;
@@ -27,6 +32,14 @@ public class UIManager : MonoBehaviour
     {
         Events.OnScoreChanged += Events_OnScoreChanged;
         Events.OnTimerChanged += Events_OnTimerChanged;
+        Events.OnTimerEnd += Events_OnTimerEnd;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnScoreChanged -= Events_OnScoreChanged;
+        Events.OnTimerChanged -= Events_OnTimerChanged;
+        Events.OnTimerEnd -= Events_OnTimerEnd;
     }
 
     private void Events_OnScoreChanged(int score)
@@ -62,5 +75,10 @@ public class UIManager : MonoBehaviour
         {
             timerAnimator.SetTrigger(ANIMATION_TRIGGER_PULSE);
         }
+    }
+
+    private void Events_OnTimerEnd(object sender, System.EventArgs e)
+    {
+        gameOverField.gameObject.SetActive(true);
     }
 }

@@ -12,6 +12,13 @@ public class AudioManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         Events.OnIncreaseScore += Events_OnIncreaseScore;
+        Events.OnTimerEnd += Events_OnTimerEnd;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnIncreaseScore -= Events_OnIncreaseScore;
+        Events.OnTimerEnd -= Events_OnTimerEnd;
     }
 
     private void Events_OnIncreaseScore(object sender, System.EventArgs e)
@@ -20,5 +27,10 @@ public class AudioManager : MonoBehaviour
         {
             audioSource.PlayOneShot(scoreIncreaseClip);
         }
+    }
+
+    private void Events_OnTimerEnd(object sender, System.EventArgs e)
+    {
+        audioSource.Stop();
     }
 }

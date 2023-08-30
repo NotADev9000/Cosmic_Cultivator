@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public bool WaveActive { get; private set; } = false;
+    public bool IsGameActive { get; private set; } = false;
     [SerializeField] private float gameTimer = 60f;
     public int Score { get; private set; } = 0;
 
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        WaveActive = true;
+        IsGameActive = true;
     }
 
     private void Update()
@@ -28,22 +28,41 @@ public class GameManager : MonoBehaviour
         UpdateTimer();
     }
 
+    private void OnDestroy()
+    {
+        Events.OnIncreaseScore -= Events_OnIncreaseScore;
+    }
+
     //--------------------
     #region Timer
 
     private void UpdateTimer()
     {
-        if (gameTimer <= 0)
+        if (IsGameActive)
         {
-            WaveActive = false;
-            Time.timeScale = 0;
-        }
-        else
-        {
-            gameTimer -= Time.deltaTime;
-        }
+            if (gameTimer <= 0)
+            {
+                OnTimerEnd();
+            }
+            else
+            {
+                DecreaseTimer();
+            }
 
-        Events.TimerChanged(gameTimer);
+            Events.TimerChanged(gameTimer);
+        }
+    }
+
+    private void DecreaseTimer()
+    {
+        gameTimer -= Time.deltaTime;
+    }
+
+    private void OnTimerEnd()
+    {
+        IsGameActive = false;
+        Time.timeScale = 0;
+        Events.TimerEnded();
     }
 
     #endregion

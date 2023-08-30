@@ -37,7 +37,6 @@ public class Cart : MonoBehaviour
         RemoveLaserHitListener();
     }
 
-
     private void Player_OnLaserShotCheck(Collider2D laserCollider)
     {
         if (laserCollider == boxCollider)

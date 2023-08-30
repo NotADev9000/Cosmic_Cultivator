@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.WaveActive)
+        if (GameManager.Instance.IsGameActive)
         {
             CheckIntervalTimer();
             DepleteIntervalTimer();

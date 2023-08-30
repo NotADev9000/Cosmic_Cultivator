@@ -11,6 +11,7 @@ public static class Events
     public static event EventHandler OnIncreaseScore;
     public static event Action<int> OnScoreChanged;
     public static event Action<float> OnTimerChanged;
+    public static event EventHandler OnTimerEnd;
 
     // WaveManager
     public static event EventHandler OnWaveIntervalTimerDepleted;
@@ -36,6 +37,11 @@ public static class Events
     public static void TimerChanged(float timer)
     {
         OnTimerChanged?.Invoke(timer);
+    }
+
+    public static void TimerEnded()
+    {
+        OnTimerEnd?.Invoke(null, EventArgs.Empty);
     }
 
     // WaveManager
