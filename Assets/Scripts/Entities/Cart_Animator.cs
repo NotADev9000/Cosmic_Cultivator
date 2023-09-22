@@ -6,6 +6,10 @@ public class Cart_Animator : MonoBehaviour
 {
     [SerializeField] private GameObject cowChild;
 
+    [Header("Animation Audio")]
+    [SerializeField] private Cart_Audio cartAudio;
+    [SerializeField] private AudioClip impactClip;
+
     private Animator animator;
 
     private const string ANIMATION_NAME_WAGON_IDLE = "Idle";
@@ -36,4 +40,15 @@ public class Cart_Animator : MonoBehaviour
         cowChild.SetActive(true);
         animator.SetTrigger(ANIMATION_TRIGGER_COW_APPEAR);
     }
+
+    //--------------------
+    #region Animation Audio
+
+    private void AnimationSound_WagonImpact()
+    {
+        cartAudio.PlayAudioOneShot(impactClip);
+    }
+
+    #endregion
+    //--------------------
 }

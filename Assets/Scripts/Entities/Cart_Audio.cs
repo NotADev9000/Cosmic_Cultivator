@@ -7,9 +7,6 @@ public class Cart_Audio : MonoBehaviour
     [Header("Cow")]
     [SerializeField] private List<AudioClip> cowClipsList = new List<AudioClip>();
 
-    [Header("Wagon")]
-    [SerializeField] private AudioClip impactClip;
-
     private AudioSource audioSource;
 
     private void Awake()
@@ -24,6 +21,13 @@ public class Cart_Audio : MonoBehaviour
         int clipIndex = Random.Range(0, cowClipsList.Count);
         AudioClip clipToPlay = cowClipsList[clipIndex];
 
+        audioSource.PlayOneShot(clipToPlay);
+
+        audioSource.pitch = 1;
+    }
+
+    public void PlayAudioOneShot(AudioClip clipToPlay)
+    {
         audioSource.PlayOneShot(clipToPlay);
     }
 }

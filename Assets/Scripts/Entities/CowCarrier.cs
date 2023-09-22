@@ -1,36 +1,14 @@
 using System;
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class CowCarrier : MonoBehaviour
 {
     public CardinalDirection MoveDirection
     {
         get { return moveDirection; }
-        set
-        {
-            moveDirection = value;
-            switch (value)
-            {
-                case CardinalDirection.Up:
-                    moveDirectionVector = Vector3.up;
-                    break;
-                case CardinalDirection.Down:
-                    moveDirectionVector = Vector3.down;
-                    break;
-                case CardinalDirection.Left:
-                    moveDirectionVector = Vector3.left;
-                    spriteRenderer.flipX = false;
-                    break;
-                case CardinalDirection.Right:
-                    moveDirectionVector = Vector3.right;
-                    spriteRenderer.flipX = true;
-                    break;
-                default:
-                    moveDirectionVector = Vector3.zero;
-                    break;
-            }
-            ResetChildCartPositions();
-        }
+        set { SetMovementDirection(value); }
     }
     [Header("Movement")]
     [SerializeField] private CardinalDirection moveDirection;
@@ -46,8 +24,11 @@ public class CowCarrier : MonoBehaviour
     [SerializeField] private Cart cartPrefab;
     private Cart[] childCarts = Array.Empty<Cart>();
 
-    // Sprite
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [Header("Tractor")]
+    [SerializeField] private SpriteRenderer tractorSprite;
+    [SerializeField] private Transform particlePosition_Right;
+    [SerializeField] private Transform particlePosition_Left;
+    [SerializeField] private GameObject particleSmoke;
 
     private void OnEnable()
     {
@@ -67,6 +48,41 @@ public class CowCarrier : MonoBehaviour
             transform.position += moveSpeed * Time.deltaTime * moveDirectionVector;
             CheckPathProgress();
         }
+    }
+
+    private void SetMovementDirection(CardinalDirection value)
+    {
+        moveDirection = value;
+        switch (value)
+        {
+            case CardinalDirection.Left:
+                moveDirectionVector = Vector3.left;
+                tractorSprite.flipX = false;
+                if (EditorApplication.isPlaying)
+                {
+                    particleSmoke.transform.parent = particlePosition_Left;
+                    particleSmoke.transform.localPosition = Vector3.zero;
+
+                    Quaternion targetRotation = Quaternion.Euler(0f, 180f, 0f);
+                    particleSmoke.transform.rotation = targetRotation;
+                }
+                break;
+            case CardinalDirection.Right:
+                moveDirectionVector = Vector3.right;
+                tractorSprite.flipX = true;
+                if (EditorApplication.isPlaying)
+                {
+                    particleSmoke.transform.parent = particlePosition_Right;
+                    particleSmoke.transform.localPosition = Vector3.zero;
+                    particleSmoke.transform.rotation = Quaternion.identity;
+                }
+                break;
+            default:
+                moveDirectionVector = Vector3.zero;
+                break;
+        }
+
+        ResetChildCartPositions();
     }
 
     //--------------------
