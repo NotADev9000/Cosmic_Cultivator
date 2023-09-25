@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public static class Events
 {
     //--------------------
     #region Events
+
+    // Player
+    public static event EventHandler OnGamePaused;
+    public static event EventHandler OnGameUnpaused;
 
     // GameManager
     public static event EventHandler OnIncreaseScore;
@@ -21,6 +24,22 @@ public static class Events
 
     //--------------------
     #region Public Methods
+
+    // Player
+    public static void PausePressed()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.IsGameActive)
+            {
+                OnGamePaused?.Invoke(null, EventArgs.Empty);
+            }
+            else if (GameManager.Instance.IsGamePaused)
+            {
+                OnGameUnpaused?.Invoke(null, EventArgs.Empty);
+            }
+        }
+    }
 
     // Entities
     public static void CartHit()

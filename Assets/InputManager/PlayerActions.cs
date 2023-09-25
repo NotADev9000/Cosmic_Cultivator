@@ -53,6 +53,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause Game"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c867739-a92a-42da-bcc2-93c868b2bae7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Restart Game"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9faadb5a-1313-4322-bdc8-aef334fb306b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Player_Map_Movement = m_Player_Map.FindAction("Movement", throwIfNotFound: true);
         m_Player_Map_Laser = m_Player_Map.FindAction("Laser", throwIfNotFound: true);
         m_Player_Map_RestartGame = m_Player_Map.FindAction("Restart Game", throwIfNotFound: true);
+        m_Player_Map_PauseGame = m_Player_Map.FindAction("Pause Game", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Map_Movement;
     private readonly InputAction m_Player_Map_Laser;
     private readonly InputAction m_Player_Map_RestartGame;
+    private readonly InputAction m_Player_Map_PauseGame;
     public struct Player_MapActions
     {
         private @PlayerActions m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Map_Movement;
         public InputAction @Laser => m_Wrapper.m_Player_Map_Laser;
         public InputAction @RestartGame => m_Wrapper.m_Player_Map_RestartGame;
+        public InputAction @PauseGame => m_Wrapper.m_Player_Map_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_Player_Map; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @RestartGame.started += instance.OnRestartGame;
             @RestartGame.performed += instance.OnRestartGame;
             @RestartGame.canceled += instance.OnRestartGame;
+            @PauseGame.started += instance.OnPauseGame;
+            @PauseGame.performed += instance.OnPauseGame;
+            @PauseGame.canceled += instance.OnPauseGame;
         }
 
         private void UnregisterCallbacks(IPlayer_MapActions instance)
@@ -245,6 +271,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @RestartGame.started -= instance.OnRestartGame;
             @RestartGame.performed -= instance.OnRestartGame;
             @RestartGame.canceled -= instance.OnRestartGame;
+            @PauseGame.started -= instance.OnPauseGame;
+            @PauseGame.performed -= instance.OnPauseGame;
+            @PauseGame.canceled -= instance.OnPauseGame;
         }
 
         public void RemoveCallbacks(IPlayer_MapActions instance)
@@ -267,5 +296,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnLaser(InputAction.CallbackContext context);
         void OnRestartGame(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

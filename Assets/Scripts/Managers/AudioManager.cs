@@ -13,12 +13,16 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         Events.OnIncreaseScore += Events_OnIncreaseScore;
         Events.OnTimerEnd += Events_OnTimerEnd;
+        Events.OnGamePaused += Events_OnGamePaused;
+        Events.OnGameUnpaused += Events_OnGameUnpaused;
     }
 
     private void OnDestroy()
     {
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
         Events.OnTimerEnd -= Events_OnTimerEnd;
+        Events.OnGamePaused -= Events_OnGamePaused;
+        Events.OnGameUnpaused -= Events_OnGameUnpaused;
     }
 
     private void Events_OnIncreaseScore(object sender, System.EventArgs e)
@@ -32,5 +36,15 @@ public class AudioManager : MonoBehaviour
     private void Events_OnTimerEnd(object sender, System.EventArgs e)
     {
         audioSource.Stop();
+    }
+
+    private void Events_OnGamePaused(object sender, System.EventArgs e)
+    {
+        audioSource.Pause();
+    }
+
+    private void Events_OnGameUnpaused(object sender, System.EventArgs e)
+    {
+        audioSource.Play();
     }
 }

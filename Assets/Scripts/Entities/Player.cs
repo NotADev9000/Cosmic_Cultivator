@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     {
         playerActions.Player_Map.Laser.performed -= Laser_performed;
         playerActions.Player_Map.RestartGame.performed -= RestartGame_performed;
+        playerActions.Player_Map.PauseGame.performed -= PauseGame_performed;
     }
 
     //--------------------
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
         playerActions.Player_Map.Enable();
         playerActions.Player_Map.Laser.performed += Laser_performed;
         playerActions.Player_Map.RestartGame.performed += RestartGame_performed;
+        playerActions.Player_Map.PauseGame.performed += PauseGame_performed;
     }
 
     private void Laser_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -88,9 +90,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void PauseGame_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!GameManager.Instance.IsGameOver)
+        {
+            Events.PausePressed();
+        }
+    }
+
     private void RestartGame_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (!GameManager.Instance.IsGameActive)
+        if (GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused)
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

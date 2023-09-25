@@ -1,13 +1,19 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public bool IsGameActive { get; private set; } = false;
+    // Game Activity
+    public bool IsGameActive
+    {
+        get { return !IsGameOver && !IsGamePaused; }
+    }
+    public bool IsGameOver { get; private set; } = false;
+    public bool IsGamePaused { get; private set; } = false;
+
+    // Game Management
     [SerializeField] private float gameTimer = 60f;
     public int Score { get; private set; } = 0;
 
@@ -16,11 +22,14 @@ public class GameManager : MonoBehaviour
         LimitFPS();
         CreateSingleton();
         Events.OnIncreaseScore += Events_OnIncreaseScore;
+        Events.OnGamePaused += Events_OnGamePaused;
+        Events.OnGameUnpaused += Events_OnGameUnpaused;
     }
 
     private void Start()
     {
-        IsGameActive = true;
+        IsGameOver = false;
+        IsGamePaused = false;
     }
 
     private void Update()
@@ -31,7 +40,27 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
+        Events.OnGamePaused -= Events_OnGamePaused;
+        Events.OnGameUnpaused -= Events_OnGameUnpaused;
     }
+
+    //--------------------
+    #region Activity
+
+    private void Events_OnGamePaused(object sender, EventArgs e)
+    {
+        IsGamePaused = true;
+        Time.timeScale = 0;
+    }
+
+    private void Events_OnGameUnpaused(object sender, EventArgs e)
+    {
+        IsGamePaused = false;
+        Time.timeScale = 1;
+    }
+
+    #endregion
+    //--------------------
 
     //--------------------
     #region Timer
@@ -60,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     private void OnTimerEnd()
     {
-        IsGameActive = false;
+        IsGameOver = true;
         Time.timeScale = 0;
         Events.TimerEnded();
     }

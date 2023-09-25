@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [Header("Score")]
     [SerializeField] private TMP_Text scoreField;
+
 
     [Space(10)]
 
@@ -18,6 +18,18 @@ public class UIManager : MonoBehaviour
 
     [Tooltip("Animates the timer when it is <= this value")]
     [SerializeField] private int pulseTimerAt = 5;
+
+
+    [Space(10)]
+
+    [Header("Pause")]
+    [SerializeField] private Image pauseOverlay;
+
+    [Space(5)]
+
+    [SerializeField] private float overlayAlphaOnPlay = 0f;
+    [SerializeField] private float overlayAlphaOnPause = 0.5f;
+
 
     [Space(10)]
 
@@ -33,6 +45,8 @@ public class UIManager : MonoBehaviour
         Events.OnScoreChanged += Events_OnScoreChanged;
         Events.OnTimerChanged += Events_OnTimerChanged;
         Events.OnTimerEnd += Events_OnTimerEnd;
+        Events.OnGamePaused += Events_OnGamePaused;
+        Events.OnGameUnpaused += Events_OnGameUnpaused;
     }
 
     private void OnDestroy()
@@ -40,6 +54,8 @@ public class UIManager : MonoBehaviour
         Events.OnScoreChanged -= Events_OnScoreChanged;
         Events.OnTimerChanged -= Events_OnTimerChanged;
         Events.OnTimerEnd -= Events_OnTimerEnd;
+        Events.OnGamePaused -= Events_OnGamePaused;
+        Events.OnGameUnpaused -= Events_OnGameUnpaused;
     }
 
     private void Events_OnScoreChanged(int score)
@@ -80,5 +96,26 @@ public class UIManager : MonoBehaviour
     private void Events_OnTimerEnd(object sender, System.EventArgs e)
     {
         gameOverField.gameObject.SetActive(true);
+        ChangePauseOverlayAlpha(overlayAlphaOnPause);
+    }
+
+    private void Events_OnGamePaused(object sender, System.EventArgs e)
+    {
+        ChangePauseOverlayAlpha(overlayAlphaOnPause);
+    }
+
+    private void Events_OnGameUnpaused(object sender, System.EventArgs e)
+    {
+        ChangePauseOverlayAlpha(overlayAlphaOnPlay);
+    }
+
+    private void ChangePauseOverlayAlpha(float alpha)
+    {
+        pauseOverlay.color = GetAlphaAsColor(alpha);
+    }
+
+    private Color GetAlphaAsColor(float value)
+    {
+        return new Color(pauseOverlay.color.r, pauseOverlay.color.g, pauseOverlay.color.b, value);
     }
 }

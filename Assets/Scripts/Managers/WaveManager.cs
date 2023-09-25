@@ -8,12 +8,14 @@ public class WaveManager : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] private float intervalTimer = 2f;
+    [SerializeField] private float initialTimer = 0.5f;
+
     private float currentTimer;
 
     private void Awake()
     {
         CreateSingleton();
-        currentTimer = intervalTimer;
+        currentTimer = initialTimer;
     }
 
     private void Update()
