@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Pause")]
     [SerializeField] private Image pauseOverlay;
+    [SerializeField] private TMP_Text pauseField;
 
     [Space(5)]
 
@@ -102,11 +103,13 @@ public class UIManager : MonoBehaviour
     private void Events_OnGamePaused(object sender, System.EventArgs e)
     {
         ChangePauseOverlayAlpha(overlayAlphaOnPause);
+        pauseField.gameObject.SetActive(true);
     }
 
     private void Events_OnGameUnpaused(object sender, System.EventArgs e)
     {
         ChangePauseOverlayAlpha(overlayAlphaOnPlay);
+        pauseField.gameObject.SetActive(false);
     }
 
     private void ChangePauseOverlayAlpha(float alpha)

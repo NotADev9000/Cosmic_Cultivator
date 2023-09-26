@@ -1,16 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip scoreIncreaseClip;
+    [Header("Sources")]
+    [SerializeField] private AudioSource audioSource_bgm;
+    [SerializeField] private AudioSource audioSource_sfx;
 
-    private AudioSource audioSource;
+    [Space(10)]
+
+    [Header("Clips")]
+    [SerializeField] private AudioClip scoreIncreaseClip;
+    [SerializeField] private AudioClip pauseClip;
+    [SerializeField] private AudioClip unpauseClip;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
         Events.OnIncreaseScore += Events_OnIncreaseScore;
         Events.OnTimerEnd += Events_OnTimerEnd;
         Events.OnGamePaused += Events_OnGamePaused;
@@ -29,22 +33,24 @@ public class AudioManager : MonoBehaviour
     {
         if (scoreIncreaseClip != null)
         {
-            audioSource.PlayOneShot(scoreIncreaseClip);
+            audioSource_bgm.PlayOneShot(scoreIncreaseClip);
         }
     }
 
     private void Events_OnTimerEnd(object sender, System.EventArgs e)
     {
-        audioSource.Stop();
+        audioSource_bgm.Stop();
     }
 
     private void Events_OnGamePaused(object sender, System.EventArgs e)
     {
-        audioSource.Pause();
+        audioSource_bgm.Pause();
+        audioSource_sfx.PlayOneShot(pauseClip);
     }
 
     private void Events_OnGameUnpaused(object sender, System.EventArgs e)
     {
-        audioSource.Play();
+        audioSource_sfx.PlayOneShot(unpauseClip);
+        audioSource_bgm.Play();
     }
 }
