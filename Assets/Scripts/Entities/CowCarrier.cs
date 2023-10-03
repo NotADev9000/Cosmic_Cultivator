@@ -58,24 +58,24 @@ public class CowCarrier : MonoBehaviour
             case CardinalDirection.Left:
                 moveDirectionVector = Vector3.left;
                 tractorSprite.flipX = false;
-                if (EditorApplication.isPlaying)
-                {
+                //if (EditorApplication.isPlaying)
+                //{
                     particleSmoke.transform.parent = particlePosition_Left;
                     particleSmoke.transform.localPosition = Vector3.zero;
 
                     Quaternion targetRotation = Quaternion.Euler(0f, 180f, 0f);
                     particleSmoke.transform.rotation = targetRotation;
-                }
+                //}
                 break;
             case CardinalDirection.Right:
                 moveDirectionVector = Vector3.right;
                 tractorSprite.flipX = true;
-                if (EditorApplication.isPlaying)
-                {
+                //if (EditorApplication.isPlaying)
+                //{
                     particleSmoke.transform.parent = particlePosition_Right;
                     particleSmoke.transform.localPosition = Vector3.zero;
                     particleSmoke.transform.rotation = Quaternion.identity;
-                }
+                //}
                 break;
             default:
                 moveDirectionVector = Vector3.zero;
@@ -152,8 +152,11 @@ public class CowCarrier : MonoBehaviour
 
     private void OnValidate()
     {
-        childCarts = GetComponentsInChildren<Cart>();
-        MoveDirection = moveDirection;
+        if (!EditorApplication.isPlaying)
+        {
+            childCarts = GetComponentsInChildren<Cart>();
+            MoveDirection = moveDirection;
+        }
     }
 
 #endif

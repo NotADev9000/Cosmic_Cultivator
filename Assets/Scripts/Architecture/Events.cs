@@ -6,15 +6,19 @@ public static class Events
     //--------------------
     #region Events
 
-    // Player
-    public static event EventHandler OnGamePaused;
-    public static event EventHandler OnGameUnpaused;
+    // Transitions
+    public static event EventHandler OnStartTransition;
+    public static event EventHandler OnTransitionEnded;
 
     // GameManager
     public static event EventHandler OnIncreaseScore;
     public static event Action<int> OnScoreChanged;
     public static event Action<float> OnTimerChanged;
     public static event EventHandler OnTimerEnd;
+
+    // Player
+    public static event EventHandler OnGamePaused;
+    public static event EventHandler OnGameUnpaused;
 
     // WaveManager
     public static event EventHandler OnWaveIntervalTimerDepleted;
@@ -24,6 +28,17 @@ public static class Events
 
     //--------------------
     #region Public Methods
+
+    // Transitions
+    public static void StartTransition()
+    {
+        OnStartTransition?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TransitionEnded()
+    {
+        OnTransitionEnded?.Invoke(null, EventArgs.Empty);
+    }
 
     // Player
     public static void PausePressed()

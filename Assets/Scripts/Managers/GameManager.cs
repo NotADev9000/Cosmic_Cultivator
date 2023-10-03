@@ -21,9 +21,7 @@ public class GameManager : MonoBehaviour
     {
         LimitFPS();
         CreateSingleton();
-        Events.OnIncreaseScore += Events_OnIncreaseScore;
-        Events.OnGamePaused += Events_OnGamePaused;
-        Events.OnGameUnpaused += Events_OnGameUnpaused;
+        AddEvents();
     }
 
     private void Start()
@@ -39,10 +37,28 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        RemoveEvents();
+    }
+
+    //--------------------
+    #region Events
+
+    private void AddEvents()
+    {
+        Events.OnIncreaseScore += Events_OnIncreaseScore;
+        Events.OnGamePaused += Events_OnGamePaused;
+        Events.OnGameUnpaused += Events_OnGameUnpaused;
+    }
+
+    private void RemoveEvents()
+    {
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
     }
+
+    #endregion
+    //--------------------
 
     //--------------------
     #region Activity
@@ -125,6 +141,7 @@ public class GameManager : MonoBehaviour
         if (Instance != null)
         {
             Debug.LogError("More than one instance of GameManager");
+            Destroy(gameObject);
         }
         Instance = this;
     }
