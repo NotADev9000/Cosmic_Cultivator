@@ -51,6 +51,6 @@ public class AudioManager : MonoBehaviour
     private void Events_OnGameUnpaused(object sender, System.EventArgs e)
     {
         audioSource_sfx.PlayOneShot(unpauseClip);
-        audioSource_bgm.Play();
+        audioSource_bgm.UnPause();
     }
 }

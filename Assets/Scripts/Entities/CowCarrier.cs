@@ -25,10 +25,11 @@ public class CowCarrier : MonoBehaviour
     private Cart[] childCarts = Array.Empty<Cart>();
 
     [Header("Tractor")]
-    [SerializeField] private SpriteRenderer tractorSprite;
-    [SerializeField] private Transform particlePosition_Right;
-    [SerializeField] private Transform particlePosition_Left;
-    [SerializeField] private GameObject particleSmoke;
+    [SerializeField] private Transform tractorVisual;
+    //[SerializeField] private SpriteRenderer tractorSprite;
+    //[SerializeField] private Transform particlePosition_Right;
+    //[SerializeField] private Transform particlePosition_Left;
+    //[SerializeField] private GameObject particleSmoke;
 
     private void OnEnable()
     {
@@ -57,25 +58,12 @@ public class CowCarrier : MonoBehaviour
         {
             case CardinalDirection.Left:
                 moveDirectionVector = Vector3.left;
-                tractorSprite.flipX = false;
-                //if (EditorApplication.isPlaying)
-                //{
-                    particleSmoke.transform.parent = particlePosition_Left;
-                    particleSmoke.transform.localPosition = Vector3.zero;
-
-                    Quaternion targetRotation = Quaternion.Euler(0f, 180f, 0f);
-                    particleSmoke.transform.rotation = targetRotation;
-                //}
+                Quaternion targetRotation = Quaternion.Euler(0f, 180f, 0f);
+                tractorVisual.rotation = targetRotation;
                 break;
             case CardinalDirection.Right:
                 moveDirectionVector = Vector3.right;
-                tractorSprite.flipX = true;
-                //if (EditorApplication.isPlaying)
-                //{
-                    particleSmoke.transform.parent = particlePosition_Right;
-                    particleSmoke.transform.localPosition = Vector3.zero;
-                    particleSmoke.transform.rotation = Quaternion.identity;
-                //}
+                tractorVisual.rotation = Quaternion.identity;
                 break;
             default:
                 moveDirectionVector = Vector3.zero;
