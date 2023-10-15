@@ -8,6 +8,7 @@ public static class Events
 
     // Transitions
     public static event EventHandler OnStartTransition;
+    public static event EventHandler OnEndTransition;
     public static event EventHandler OnTransitionEnded;
 
     // GameManager
@@ -33,6 +34,11 @@ public static class Events
     public static void StartTransition()
     {
         OnStartTransition?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void EndTransition()
+    {
+        OnEndTransition?.Invoke(null, EventArgs.Empty);
     }
 
     public static void TransitionEnded()
