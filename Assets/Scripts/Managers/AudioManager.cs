@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
     [Header("Sources")]
     [SerializeField] private AudioSource audioSource_bgm;
     [SerializeField] private AudioSource audioSource_sfx;
+    private float bgmTime; // how many seconds of BGM have played
 
     [Space(10)]
 
@@ -44,12 +45,14 @@ public class AudioManager : MonoBehaviour
 
     private void Events_OnGamePaused(object sender, System.EventArgs e)
     {
+        bgmTime = audioSource_bgm.time;
         audioSource_bgm.Pause();
         audioSource_sfx.PlayOneShot(pauseClip);
     }
 
     private void Events_OnGameUnpaused(object sender, System.EventArgs e)
     {
+        audioSource_bgm.time = bgmTime;
         audioSource_sfx.PlayOneShot(unpauseClip);
         audioSource_bgm.UnPause();
     }
