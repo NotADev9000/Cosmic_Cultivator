@@ -7,13 +7,13 @@ public class TitleManager : MonoBehaviour
 {
     public void PlayPressed()
     {
-        Events.OnTransitionEnded += Events_OnTransitionEnded;
+        Events.OnTransitionFinished += Events_OnTransitionFinished;
         Events.StartTransition();
     }
 
-    private void Events_OnTransitionEnded(object sender, System.EventArgs e)
+    private void Events_OnTransitionFinished(object sender, System.EventArgs e)
     {
-        Events.OnTransitionEnded -= Events_OnTransitionEnded;
+        Events.OnTransitionFinished -= Events_OnTransitionFinished;
         SceneManager.LoadScene(1);
     }
 }

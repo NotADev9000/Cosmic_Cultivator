@@ -26,12 +26,11 @@ public class TransitionsManager : MonoBehaviour
 
     private void Events_OnEndTransition(object sender, System.EventArgs e)
     {
-        print("end transition");
         animator.SetTrigger("End");
     }
 
-    private void TransitionEnded()
+    private void TransitionFinished()
     {
-        Events.TransitionEnded();
+        Events.TransitionFinished();
     }
 }

@@ -9,9 +9,10 @@ public static class Events
     // Transitions
     public static event EventHandler OnStartTransition;
     public static event EventHandler OnEndTransition;
-    public static event EventHandler OnTransitionEnded;
+    public static event EventHandler OnTransitionFinished;
 
     // GameManager
+    public static event EventHandler OnGameStart;
     public static event EventHandler OnIncreaseScore;
     public static event Action<int> OnScoreChanged;
     public static event Action<float> OnTimerChanged;
@@ -41,9 +42,9 @@ public static class Events
         OnEndTransition?.Invoke(null, EventArgs.Empty);
     }
 
-    public static void TransitionEnded()
+    public static void TransitionFinished()
     {
-        OnTransitionEnded?.Invoke(null, EventArgs.Empty);
+        OnTransitionFinished?.Invoke(null, EventArgs.Empty);
     }
 
     // Player
@@ -69,6 +70,11 @@ public static class Events
     }
 
     // GameManager
+    public static void GameStart()
+    {
+        OnGameStart?.Invoke(null, EventArgs.Empty);
+    }
+
     public static void ScoreChanged(int score)
     {
         OnScoreChanged?.Invoke(score);

@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         Events.EndTransition();
         IsGameOver = false;
         IsGamePaused = false;
+        Events.GameStart();
     }
 
     private void Update()

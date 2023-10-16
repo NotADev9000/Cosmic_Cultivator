@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
     [Header("Sources")]
     [SerializeField] private AudioSource audioSource_bgm;
     [SerializeField] private AudioSource audioSource_sfx;
@@ -9,23 +11,33 @@ public class AudioManager : MonoBehaviour
 
     [Space(10)]
 
-    [Header("Clips")]
+    [Header("BGM Clips")]
+    [SerializeField] private AudioClip gameBgmClip;
+
+    [Space(10)]
+
+    [Header("SFX Clips")]
     [SerializeField] private AudioClip scoreIncreaseClip;
     [SerializeField] private AudioClip pauseClip;
     [SerializeField] private AudioClip unpauseClip;
 
     private void Awake()
     {
-        Events.OnIncreaseScore += Events_OnIncreaseScore;
-        Events.OnTimerEnd += Events_OnTimerEnd;
-        Events.OnGamePaused += Events_OnGamePaused;
-        Events.OnGameUnpaused += Events_OnGameUnpaused;
+        if (CreateSingleton())
+        {
+            Events.OnIncreaseScore += Events_OnIncreaseScore;
+            Events.OnTimerEnd += Events_OnTimerEnd;
+            Events.OnGameStart += Events_OnGameStart;
+            Events.OnGamePaused += Events_OnGamePaused;
+            Events.OnGameUnpaused += Events_OnGameUnpaused;
+        }
     }
 
     private void OnDestroy()
     {
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
         Events.OnTimerEnd -= Events_OnTimerEnd;
+        Events.OnGameStart -= Events_OnGameStart;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
     }
@@ -43,6 +55,12 @@ public class AudioManager : MonoBehaviour
         audioSource_bgm.Stop();
     }
 
+    private void Events_OnGameStart(object sender, System.EventArgs e)
+    {
+        audioSource_bgm.clip = gameBgmClip;
+        audioSource_bgm.Play();
+    }
+
     private void Events_OnGamePaused(object sender, System.EventArgs e)
     {
         bgmTime = audioSource_bgm.time;
@@ -55,5 +73,20 @@ public class AudioManager : MonoBehaviour
         audioSource_bgm.time = bgmTime;
         audioSource_sfx.PlayOneShot(unpauseClip);
         audioSource_bgm.UnPause();
+    }
+
+    private bool CreateSingleton()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return false;
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            return true;
+        }
     }
 }
