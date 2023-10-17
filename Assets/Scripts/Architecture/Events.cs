@@ -13,10 +13,11 @@ public static class Events
 
     // GameManager
     public static event EventHandler OnGameStart;
+    public static event EventHandler OnGameEnd;
+    public static event EventHandler OnIntroStart;
     public static event EventHandler OnIncreaseScore;
     public static event Action<int> OnScoreChanged;
     public static event Action<float> OnTimerChanged;
-    public static event EventHandler OnTimerEnd;
 
     // Player
     public static event EventHandler OnGamePaused;
@@ -70,9 +71,19 @@ public static class Events
     }
 
     // GameManager
+    public static void IntroStart()
+    {
+        OnIntroStart?.Invoke(null, EventArgs.Empty);
+    }
+
     public static void GameStart()
     {
         OnGameStart?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void GameEnd()
+    {
+        OnGameEnd?.Invoke(null, EventArgs.Empty);
     }
 
     public static void ScoreChanged(int score)
@@ -85,10 +96,6 @@ public static class Events
         OnTimerChanged?.Invoke(timer);
     }
 
-    public static void TimerEnded()
-    {
-        OnTimerEnd?.Invoke(null, EventArgs.Empty);
-    }
 
     // WaveManager
     public static void WaveIntervalTimerDepleted()

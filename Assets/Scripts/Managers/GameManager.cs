@@ -8,13 +8,17 @@ public class GameManager : MonoBehaviour
     // Game Activity
     public bool IsGameActive
     {
-        get { return !IsGameOver && !IsGamePaused; }
+        get { return !IsGameOver && !IsGamePaused && IsGameStarted; }
     }
     public bool IsGameOver { get; private set; } = false;
     public bool IsGamePaused { get; private set; } = false;
+    public bool IsGameStarted { get; private set; } = false;
+    public bool IsIntroRunning { get; private set; } = false;
 
     // Game Management
+    [SerializeField] private float introTimer = 3f;
     [SerializeField] private float gameTimer = 60f;
+    private float countdownTimer = 0f;
     public int Score { get; private set; } = 0;
 
     private void Awake()
@@ -27,9 +31,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Events.EndTransition();
-        IsGameOver = false;
-        IsGamePaused = false;
-        Events.GameStart();
     }
 
     private void Update()
@@ -43,10 +44,40 @@ public class GameManager : MonoBehaviour
     }
 
     //--------------------
-    #region Events
+    #region Game Loop Management
+
+    private void StartIntro()
+    {
+        IsIntroRunning = true;
+        countdownTimer = introTimer;
+    }
+
+    private void StartGame()
+    {
+        IsIntroRunning = false;
+        IsGameOver = false;
+        IsGamePaused = false;
+        IsGameStarted = true;
+        countdownTimer = gameTimer;
+        Events.GameStart();
+    }
+
+    private void EndGame()
+    {
+        IsGameOver = true;
+        Time.timeScale = 0;
+        Events.GameEnd();
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Set Events
 
     private void AddEvents()
     {
+        Events.OnTransitionFinished += Events_OnTransitionFinished;
         Events.OnIncreaseScore += Events_OnIncreaseScore;
         Events.OnGamePaused += Events_OnGamePaused;
         Events.OnGameUnpaused += Events_OnGameUnpaused;
@@ -54,6 +85,7 @@ public class GameManager : MonoBehaviour
 
     private void RemoveEvents()
     {
+        Events.OnTransitionFinished -= Events_OnTransitionFinished;
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
@@ -63,7 +95,15 @@ public class GameManager : MonoBehaviour
     //--------------------
 
     //--------------------
-    #region Activity
+    #region Events Activation
+
+    private void Events_OnTransitionFinished(object sender, EventArgs e)
+    {
+        if (!IsGameStarted)
+        {
+            StartIntro();
+        }
+    }
 
     private void Events_OnGamePaused(object sender, EventArgs e)
     {
@@ -85,9 +125,9 @@ public class GameManager : MonoBehaviour
 
     private void UpdateTimer()
     {
-        if (IsGameActive)
+        if (IsIntroRunning || IsGameActive)
         {
-            if (gameTimer <= 0)
+            if (countdownTimer <= 0)
             {
                 OnTimerEnd();
             }
@@ -96,20 +136,25 @@ public class GameManager : MonoBehaviour
                 DecreaseTimer();
             }
 
-            Events.TimerChanged(gameTimer);
+            Events.TimerChanged(countdownTimer);
         }
     }
 
     private void DecreaseTimer()
     {
-        gameTimer -= Time.deltaTime;
+        countdownTimer -= Time.deltaTime;
     }
 
     private void OnTimerEnd()
     {
-        IsGameOver = true;
-        Time.timeScale = 0;
-        Events.TimerEnded();
+        if (IsIntroRunning)
+        {
+            StartGame();
+        }
+        else
+        {
+            EndGame();
+        }
     }
 
     #endregion

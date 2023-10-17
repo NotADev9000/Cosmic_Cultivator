@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         if (CreateSingleton())
         {
             Events.OnIncreaseScore += Events_OnIncreaseScore;
-            Events.OnTimerEnd += Events_OnTimerEnd;
+            Events.OnGameEnd += Events_OnGameEnd;
             Events.OnGameStart += Events_OnGameStart;
             Events.OnGamePaused += Events_OnGamePaused;
             Events.OnGameUnpaused += Events_OnGameUnpaused;
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
-        Events.OnTimerEnd -= Events_OnTimerEnd;
+        Events.OnGameEnd -= Events_OnGameEnd;
         Events.OnGameStart -= Events_OnGameStart;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
@@ -46,11 +46,11 @@ public class AudioManager : MonoBehaviour
     {
         if (scoreIncreaseClip != null)
         {
-            audioSource_bgm.PlayOneShot(scoreIncreaseClip);
+            audioSource_sfx.PlayOneShot(scoreIncreaseClip);
         }
     }
 
-    private void Events_OnTimerEnd(object sender, System.EventArgs e)
+    private void Events_OnGameEnd(object sender, System.EventArgs e)
     {
         audioSource_bgm.Stop();
     }
@@ -58,6 +58,7 @@ public class AudioManager : MonoBehaviour
     private void Events_OnGameStart(object sender, System.EventArgs e)
     {
         audioSource_bgm.clip = gameBgmClip;
+        audioSource_bgm.time = 0;
         audioSource_bgm.Play();
     }
 
