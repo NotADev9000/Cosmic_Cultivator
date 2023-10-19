@@ -52,6 +52,10 @@ public class Player : MonoBehaviour
 
             transform.position += (Vector3)MoveDirection * moveDistance;
         }
+        else
+        {
+            MoveDirection = Vector3.zero;
+        }
     }
 
     private void ClampToScreen()

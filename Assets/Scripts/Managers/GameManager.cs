@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         IsGameOver = true;
-        Time.timeScale = 0;
+        Events.FadeOutBgm();
         Events.GameEnd();
     }
 

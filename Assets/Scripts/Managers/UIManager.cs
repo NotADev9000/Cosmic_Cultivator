@@ -11,19 +11,8 @@ public class UIManager : MonoBehaviour
     [Space(10)]
 
     [Header("Timer")]
-    [SerializeField] private TMP_Text[] timerFields;
-    [SerializeField] private Animator[] timerAnimators;
-
-    [Space(5)]
-
-    [Tooltip("Before game start, animates the timer when it is <= this value")]
-    [SerializeField] private int timerStartingPulse = 5;
-    [Tooltip("During the game countdown, animates the timer when it is <= this value")]
-    [SerializeField] private int timerGamePulse = 10;
-
-    [Space(5)]
-
-    [SerializeField] private string introTimerFinishedText = "Go!";
+    [SerializeField] private Timer timerIntro;
+    [SerializeField] private Timer timerMain;
 
     //------------------------------------------------------------------
     [Space(10)]
@@ -43,20 +32,9 @@ public class UIManager : MonoBehaviour
     [Header("Game Over")]
     [SerializeField] private TMP_Text gameOverField;
 
-    //------------------------------------------------------------------
-    private const string ANIMATION_TRIGGER_PULSE = "Pulse";
-    private const string ANIMATION_TRIGGER_PULSEFADE = "PulseFade";
-    private const int TIMER_INDEX_INTRO = 0;
-    private const int TIMER_INDEX_MAIN = 1;
-
-    private int timerIndex = TIMER_INDEX_INTRO;
-    private int pulseTimerAt = 0;
-    private int lastTimeDisplayed = 0;
-
     private void Awake()
     {
         AddEvents();
-        pulseTimerAt = timerStartingPulse;
     }
 
     private void OnDestroy()
@@ -71,7 +49,6 @@ public class UIManager : MonoBehaviour
     {
         Events.OnGameStart += Events_OnGameStart;
         Events.OnScoreChanged += Events_OnScoreChanged;
-        Events.OnTimerChanged += Events_OnTimerChanged;
         Events.OnGameEnd += Events_OnGameEnd;
         Events.OnGamePaused += Events_OnGamePaused;
         Events.OnGameUnpaused += Events_OnGameUnpaused;
@@ -81,7 +58,6 @@ public class UIManager : MonoBehaviour
     {
         Events.OnGameStart -= Events_OnGameStart;
         Events.OnScoreChanged -= Events_OnScoreChanged;
-        Events.OnTimerChanged -= Events_OnTimerChanged;
         Events.OnGameEnd -= Events_OnGameEnd;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
@@ -95,8 +71,8 @@ public class UIManager : MonoBehaviour
 
     private void Events_OnGameStart(object sender, System.EventArgs e)
     {
-        pulseTimerAt = timerGamePulse;
-        timerIndex = TIMER_INDEX_MAIN;
+        timerIntro.isRunning = false;
+        timerMain.isRunning = true;
     }
 
     private void Events_OnGameEnd(object sender, System.EventArgs e)
@@ -108,16 +84,6 @@ public class UIManager : MonoBehaviour
     private void Events_OnScoreChanged(int score)
     {
         SetScoreText(score);
-    }
-
-    private void Events_OnTimerChanged(float time)
-    {
-        int timeAsInt = Mathf.CeilToInt(time);
-        if (timeAsInt != lastTimeDisplayed)
-        {
-            lastTimeDisplayed = timeAsInt;
-            UpdateActiveTimer(timeAsInt);
-        }
     }
 
     private void Events_OnGamePaused(object sender, System.EventArgs e)
@@ -132,35 +98,6 @@ public class UIManager : MonoBehaviour
         pauseField.gameObject.SetActive(false);
     }
 
-    //--------------------
-    #region Timers
-
-    private void UpdateActiveTimer(int time)
-    {
-        bool mainTimerIsActive = timerIndex == TIMER_INDEX_MAIN;
-
-        SetTimerText(time.ToString());
-        if (mainTimerIsActive) PadTimerText();
-        if (time <= pulseTimerAt)
-        {
-            string trigger;
-            if (!mainTimerIsActive && time <= 0)
-            {
-                trigger = ANIMATION_TRIGGER_PULSEFADE;
-                SetTimerText(introTimerFinishedText);
-            }
-            else
-            {
-                trigger = ANIMATION_TRIGGER_PULSE;
-            }
-
-            TriggerAnimation_Timer(trigger);
-        }
-    }
-
-    #endregion
-    //--------------------
-
     #endregion
     //--------------------
 
@@ -170,27 +107,6 @@ public class UIManager : MonoBehaviour
     private void SetScoreText(int score)
     {
         scoreField.text = score.ToString();
-    }
-
-    private void SetTimerText(string text)
-    {
-        timerFields[timerIndex].text = text;
-    }
-
-    private void PadTimerText()
-    {
-        timerFields[timerIndex].text = timerFields[timerIndex].text.PadLeft(2, '0');
-    }
-
-    #endregion
-    //--------------------
-
-    //--------------------
-    #region Animating
-
-    private void TriggerAnimation_Timer(string triggerName)
-    {
-        timerAnimators[timerIndex].SetTrigger(triggerName);
     }
 
     #endregion

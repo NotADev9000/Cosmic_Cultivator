@@ -9,6 +9,7 @@ public class TitleManager : MonoBehaviour
     {
         Events.OnTransitionFinished += Events_OnTransitionFinished;
         Events.StartTransition();
+        Events.FadeOutBgm();
     }
 
     private void Events_OnTransitionFinished(object sender, System.EventArgs e)

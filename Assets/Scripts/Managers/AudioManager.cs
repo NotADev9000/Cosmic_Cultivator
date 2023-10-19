@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -26,20 +27,20 @@ public class AudioManager : MonoBehaviour
         if (CreateSingleton())
         {
             Events.OnIncreaseScore += Events_OnIncreaseScore;
-            Events.OnGameEnd += Events_OnGameEnd;
             Events.OnGameStart += Events_OnGameStart;
             Events.OnGamePaused += Events_OnGamePaused;
             Events.OnGameUnpaused += Events_OnGameUnpaused;
+            Events.OnBgmFadeOut += Events_OnBgmFadeOut;
         }
     }
 
     private void OnDestroy()
     {
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
-        Events.OnGameEnd -= Events_OnGameEnd;
         Events.OnGameStart -= Events_OnGameStart;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
+        Events.OnBgmFadeOut -= Events_OnBgmFadeOut;
     }
 
     private void Events_OnIncreaseScore(object sender, System.EventArgs e)
@@ -50,15 +51,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Events_OnGameEnd(object sender, System.EventArgs e)
-    {
-        audioSource_bgm.Stop();
-    }
-
     private void Events_OnGameStart(object sender, System.EventArgs e)
     {
         audioSource_bgm.clip = gameBgmClip;
         audioSource_bgm.time = 0;
+        audioSource_bgm.volume = 1;
         audioSource_bgm.Play();
     }
 
@@ -74,6 +71,29 @@ public class AudioManager : MonoBehaviour
         audioSource_bgm.time = bgmTime;
         audioSource_sfx.PlayOneShot(unpauseClip);
         audioSource_bgm.UnPause();
+    }
+
+    private void Events_OnBgmFadeOut(object sender, System.EventArgs e)
+    {
+        FadeOutBgm(1);
+    }
+
+    private void FadeOutBgm(float time)
+    {
+        StartCoroutine(Fade(audioSource_bgm, 0, time));
+    }
+
+    private IEnumerator Fade(AudioSource source, float targetVolume, float fadeDuration)
+    {
+        float startVolume = source.volume;
+        float secondsSinceFadeStarted = 0;
+
+        while (secondsSinceFadeStarted < fadeDuration)
+        {
+            secondsSinceFadeStarted += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume, targetVolume, secondsSinceFadeStarted / fadeDuration);
+            yield return null;
+        }
     }
 
     private bool CreateSingleton()
