@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Timer: MonoBehaviour
 {
+    [Tooltip("Is the timer active")]
     public bool isRunning = false;
 
     //----------------------------------------------------------
@@ -19,9 +20,9 @@ public class Timer: MonoBehaviour
     //----------------------------------------------------------
     [Header("Sounds")]
     [SerializeField] private bool playSoundWhenLow = true;
+    [SerializeField] private bool playSoundOnZero = true;
     [Tooltip("Plays sound when timer is <= this value")]
     [SerializeField] private int soundAt = 5;
-    [SerializeField] private bool playSoundOnZero = true;
 
     [Space(5)]
 
@@ -43,6 +44,15 @@ public class Timer: MonoBehaviour
 
     [Space(5)]
 
+    [SerializeField] private bool colorChangeOnLow = false;
+    [SerializeField] private TMP_ColorGradient colorChangeTo;
+    [Tooltip("change color when timer is <= this value")]
+    [SerializeField] private int changeColorAt = 5;
+
+
+    [Space(5)]
+
+    [Tooltip("minimum number of digits displayed during countdown")]
     [SerializeField] private int numberOfDigits = 1;
 
     //----------------------------------------------------------
@@ -83,6 +93,9 @@ public class Timer: MonoBehaviour
     #endregion
     //--------------------
 
+    //--------------------
+    #region Timer Management
+
     private void Events_OnTimerChanged(float time)
     {
         if (isRunning)
@@ -101,8 +114,15 @@ public class Timer: MonoBehaviour
         SetText(time);
         PadText();
         if (time <= pulseAt && shouldAnimate) AnimateTimer(time);
+        if (time <= changeColorAt && colorChangeOnLow) ChangeColor(colorChangeTo);
         UpdateAndPlaySounds(time);
     }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Changing Values
 
     private void SetText(int time)
     {
@@ -119,6 +139,11 @@ public class Timer: MonoBehaviour
     {
         string animationTrigger = time <= 0 ? ANIMATION_TRIGGER_PULSEFADE : ANIMATION_TRIGGER_PULSE;
         animator.SetTrigger(animationTrigger);
+    }
+
+    private void ChangeColor(TMP_ColorGradient color)
+    {
+        textField.colorGradientPreset = color;
     }
 
     private void UpdateAndPlaySounds(int time)
@@ -145,4 +170,8 @@ public class Timer: MonoBehaviour
 
         audioSource.Play();
     }
+
+    #endregion
+    //--------------------
+
 }
