@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -30,7 +32,17 @@ public class UIManager : MonoBehaviour
     [Space(10)]
 
     [Header("Game Over")]
-    [SerializeField] private TMP_Text gameOverField;
+    [SerializeField] private PlayableDirector gameOverTimeline;
+    [SerializeField] private float waitForBeforePlaying = 2f;
+
+    [Space(5)]
+
+    [SerializeField] private TMP_Text gameOverScoreField;
+    [SerializeField] private string gameOverScoreText = "Your Score: ";
+    [SerializeField] private TMP_Text gameOverHighscoreField;
+    [SerializeField] private string gameOverHighscoreText = "Highscore: ";
+
+    private string displayScore = "0";
 
     private void Awake()
     {
@@ -77,13 +89,14 @@ public class UIManager : MonoBehaviour
 
     private void Events_OnGameEnd(object sender, System.EventArgs e)
     {
-        gameOverField.gameObject.SetActive(true);
-        ChangePauseOverlayAlpha(overlayAlphaOnPause);
+        SetGameoverFields();
+        StartCoroutine(PlayGameOverCutscene());
     }
 
     private void Events_OnScoreChanged(int score)
     {
-        SetScoreText(score);
+        displayScore = score.ToString();
+        SetScoreText(displayScore);
     }
 
     private void Events_OnGamePaused(object sender, System.EventArgs e)
@@ -102,11 +115,28 @@ public class UIManager : MonoBehaviour
     //--------------------
 
     //--------------------
-    #region Text
+    #region Score
 
-    private void SetScoreText(int score)
+    private void SetScoreText(string score)
     {
-        scoreField.text = score.ToString();
+        scoreField.text = score;
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region GameOver
+
+    private void SetGameoverFields()
+    {
+        gameOverScoreField.text = gameOverScoreText + displayScore;
+    }
+
+    private IEnumerator PlayGameOverCutscene()
+    {
+        yield return new WaitForSeconds(waitForBeforePlaying);
+        gameOverTimeline.Play();
     }
 
     #endregion

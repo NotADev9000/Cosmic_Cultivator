@@ -80,10 +80,10 @@ public class AudioManager : MonoBehaviour
 
     private void FadeOutBgm(float time)
     {
-        StartCoroutine(Fade(audioSource_bgm, 0, time));
+        StartCoroutine(FadeAudioSource(audioSource_bgm, 0, time));
     }
 
-    private IEnumerator Fade(AudioSource source, float targetVolume, float fadeDuration)
+    private IEnumerator FadeAudioSource(AudioSource source, float targetVolume, float fadeDuration)
     {
         float startVolume = source.volume;
         float secondsSinceFadeStarted = 0;
