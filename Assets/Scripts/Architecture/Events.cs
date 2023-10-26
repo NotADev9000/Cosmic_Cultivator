@@ -22,6 +22,9 @@ public static class Events
     // AudioManager
     public static event EventHandler OnBgmFadeOut;
 
+    // UIManager
+    public static event EventHandler OnGameOverCutsceneStarted;
+
     // Player
     public static event EventHandler OnGamePaused;
     public static event EventHandler OnGameUnpaused;
@@ -82,6 +85,13 @@ public static class Events
     public static void FadeOutBgm()
     {
         OnBgmFadeOut?.Invoke(null, EventArgs.Empty);
+    }
+
+    // UIManager
+
+    public static void StartingGameOverCutscene()
+    {
+        OnGameOverCutsceneStarted?.Invoke(null, EventArgs.Empty);
     }
 
     // Player

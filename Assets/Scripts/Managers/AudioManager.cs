@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("BGM Clips")]
     [SerializeField] private AudioClip gameBgmClip;
+    [SerializeField] private AudioClip gameOverClip;
 
     [Space(10)]
 
@@ -30,6 +31,7 @@ public class AudioManager : MonoBehaviour
             Events.OnGameStart += Events_OnGameStart;
             Events.OnGamePaused += Events_OnGamePaused;
             Events.OnGameUnpaused += Events_OnGameUnpaused;
+            Events.OnGameOverCutsceneStarted += Events_OnGameOverCutsceneStarted;
             Events.OnBgmFadeOut += Events_OnBgmFadeOut;
         }
     }
@@ -40,6 +42,7 @@ public class AudioManager : MonoBehaviour
         Events.OnGameStart -= Events_OnGameStart;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
+        Events.OnGameOverCutsceneStarted -= Events_OnGameOverCutsceneStarted;
         Events.OnBgmFadeOut -= Events_OnBgmFadeOut;
     }
 
@@ -71,6 +74,13 @@ public class AudioManager : MonoBehaviour
         audioSource_bgm.time = bgmTime;
         audioSource_sfx.PlayOneShot(unpauseClip);
         audioSource_bgm.UnPause();
+    }
+
+    private void Events_OnGameOverCutsceneStarted(object sender, System.EventArgs e)
+    {
+        audioSource_bgm.clip = gameOverClip;
+        audioSource_bgm.volume = 1;
+        audioSource_bgm.Play();
     }
 
     private void Events_OnBgmFadeOut(object sender, System.EventArgs e)

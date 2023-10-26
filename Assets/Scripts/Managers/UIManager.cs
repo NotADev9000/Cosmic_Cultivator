@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverScoreField;
     [SerializeField] private string gameOverScoreText = "Your Score: ";
     [SerializeField] private TMP_Text gameOverHighscoreField;
-    [SerializeField] private string gameOverHighscoreText = "Highscore: ";
+    //[SerializeField] private string gameOverHighscoreText = "Highscore: ";
 
     private string displayScore = "0";
 
@@ -136,6 +136,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator PlayGameOverCutscene()
     {
         yield return new WaitForSeconds(waitForBeforePlaying);
+        Events.StartingGameOverCutscene();
         gameOverTimeline.Play();
     }
 

@@ -319,6 +319,10 @@ PlayableDirector:
     value: {fileID: 236403826}
   - key: {fileID: -6824721447659327510, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
     value: {fileID: 1276364357}
+  - key: {fileID: -3434318447720628504, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2028412208222104923, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &236403826 stripped
@@ -567,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 117440511
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColorGradientPreset
@@ -1068,8 +1072,9 @@ MonoBehaviour:
   overlayAlphaOnPlay: 0
   overlayAlphaOnPause: 0.8
   gameOverTimeline: {fileID: 171884651}
-  waitForBeforePlaying: 2
+  waitForBeforePlaying: 3
   gameOverScoreField: {fileID: 729686751}
+  gameOverScoreText: 'Your Score: '
   gameOverHighscoreField: {fileID: 277721418}
 --- !u!1001 &680593570
 PrefabInstance:
@@ -1780,8 +1785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792d9cfdd6ce8cf449b740e93168081f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introTimer: 1
-  gameTimer: 3
+  introTimer: 3
+  gameTimer: 25
 --- !u!4 &1264752471
 Transform:
   m_ObjectHideFlags: 0
@@ -1823,7 +1828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 3774873599
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColorGradientPreset
@@ -2913,7 +2918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 1308622847
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColorGradientPreset

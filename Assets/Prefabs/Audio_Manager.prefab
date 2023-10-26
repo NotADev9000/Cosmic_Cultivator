@@ -49,7 +49,7 @@ MonoBehaviour:
   audioSource_bgm: {fileID: 4558815545337172925}
   audioSource_sfx: {fileID: 7361489093597502223}
   gameBgmClip: {fileID: 8300000, guid: cfe4eab0e98e4dd40b3a56b1af81a870, type: 3}
-  gameoverClip: {fileID: 8300000, guid: 50eeb7b19c323f14bbedce7ecc070a38, type: 3}
+  gameOverClip: {fileID: 8300000, guid: 42d11939408376b41a31e271d1677197, type: 3}
   scoreIncreaseClip: {fileID: 8300000, guid: 0b5ead73c511072429da8e84b4c85666, type: 3}
   pauseClip: {fileID: 8300000, guid: fa42c173266e7064f8080105e8da0768, type: 3}
   unpauseClip: {fileID: 8300000, guid: 340f8b916b2ed1446b2126079dd941c5, type: 3}
