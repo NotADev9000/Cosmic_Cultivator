@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     [Space(10)]
 
     [Header("SFX Clips")]
+    [SerializeField] private AudioClip menuButtonClip;
     [SerializeField] private AudioClip scoreIncreaseClip;
     [SerializeField] private AudioClip pauseClip;
     [SerializeField] private AudioClip unpauseClip;
@@ -27,6 +28,7 @@ public class AudioManager : MonoBehaviour
     {
         if (CreateSingleton())
         {
+            Events.OnMenuButtonPressed += Events_OnMenuButtonPressed;
             Events.OnIncreaseScore += Events_OnIncreaseScore;
             Events.OnGameStart += Events_OnGameStart;
             Events.OnGamePaused += Events_OnGamePaused;
@@ -38,12 +40,18 @@ public class AudioManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        Events.OnMenuButtonPressed -= Events_OnMenuButtonPressed;
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
         Events.OnGameStart -= Events_OnGameStart;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
         Events.OnGameOverCutsceneStarted -= Events_OnGameOverCutsceneStarted;
         Events.OnBgmFadeOut -= Events_OnBgmFadeOut;
+    }
+
+    private void Events_OnMenuButtonPressed(object sender, System.EventArgs e)
+    {
+        audioSource_sfx.PlayOneShot(menuButtonClip);
     }
 
     private void Events_OnIncreaseScore(object sender, System.EventArgs e)

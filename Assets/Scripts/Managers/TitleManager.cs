@@ -11,8 +11,9 @@ public class TitleManager : MonoBehaviour
     {
         if (!HasPressedPlay)
         {
+            Events.MenuButtonPressed();
             Events.OnTransitionFinished += Events_OnTransitionFinished;
-            Events.StartTransition();
+            Events.StartTransition(true);
             Events.FadeOutBgm();
             HasPressedPlay = true;
         }

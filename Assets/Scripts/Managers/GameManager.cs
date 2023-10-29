@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Events.EndTransition();
+        Events.EndTransition(false);
     }
 
     private void Update()

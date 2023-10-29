@@ -106,8 +106,9 @@ public class Player : MonoBehaviour
     {
         if (GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused && GameManager.Instance.CanResetGame)
         {
+            Events.MenuButtonPressed();
             playerActions.Player_Map.RestartGame.performed -= RestartGame_performed;
-            Events.StartTransition();
+            Events.StartTransition(true);
         }
     }
 

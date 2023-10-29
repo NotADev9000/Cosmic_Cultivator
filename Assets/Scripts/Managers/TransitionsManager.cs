@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TransitionsManager : MonoBehaviour
 {
+    [SerializeField] float delayAmount = 0.2f;
+
     private Animator animator;
 
     private void Awake()
@@ -19,14 +21,20 @@ public class TransitionsManager : MonoBehaviour
         Events.OnEndTransition -= Events_OnEndTransition;
     }
 
-    private void Events_OnStartTransition(object sender, System.EventArgs e)
+    private void Events_OnStartTransition(bool delayTransition)
     {
-        animator.SetTrigger("Start");
+        StartCoroutine(ActivateTransition("Start", delayTransition));
     }
 
-    private void Events_OnEndTransition(object sender, System.EventArgs e)
+    private void Events_OnEndTransition(bool delayTransition)
     {
-        animator.SetTrigger("End");
+        StartCoroutine(ActivateTransition("End", delayTransition));
+    }
+
+    private IEnumerator ActivateTransition(string transitionType, bool delayTransition)
+    {
+        if (delayTransition) yield return new WaitForSeconds(delayAmount);
+        animator.SetTrigger(transitionType);
     }
 
     private void TransitionFinished()

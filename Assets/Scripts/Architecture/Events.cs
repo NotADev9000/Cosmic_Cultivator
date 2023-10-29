@@ -7,8 +7,8 @@ public static class Events
     #region Events
 
     // Transitions
-    public static event EventHandler OnStartTransition;
-    public static event EventHandler OnEndTransition;
+    public static event Action<bool> OnStartTransition;
+    public static event Action<bool> OnEndTransition;
     public static event EventHandler OnTransitionFinished;
 
     // GameManager
@@ -25,6 +25,9 @@ public static class Events
     // UIManager
     public static event EventHandler OnGameOverCutsceneStarted;
 
+    // General UI
+    public static event EventHandler OnMenuButtonPressed;
+
     // Player
     public static event EventHandler OnGamePaused;
     public static event EventHandler OnGameUnpaused;
@@ -39,14 +42,14 @@ public static class Events
     #region Public Methods
 
     // Transitions
-    public static void StartTransition()
+    public static void StartTransition(bool delayTransition)
     {
-        OnStartTransition?.Invoke(null, EventArgs.Empty);
+        OnStartTransition?.Invoke(delayTransition);
     }
 
-    public static void EndTransition()
+    public static void EndTransition(bool delayTransition)
     {
-        OnEndTransition?.Invoke(null, EventArgs.Empty);
+        OnEndTransition?.Invoke(delayTransition);
     }
 
     public static void TransitionFinished()
@@ -92,6 +95,13 @@ public static class Events
     public static void StartingGameOverCutscene()
     {
         OnGameOverCutsceneStarted?.Invoke(null, EventArgs.Empty);
+    }
+
+    // General UI
+
+    public static void MenuButtonPressed()
+    {
+        OnMenuButtonPressed?.Invoke(null, EventArgs.Empty);
     }
 
     // Player
