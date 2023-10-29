@@ -324,6 +324,10 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -2028412208222104923, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -112146260438179949, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7138513478210841125, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 269a08260a4cc324d96e7ae9fd428efe: {fileID: 1264752469}
@@ -576,15 +580,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_text
-      value: 'highscore: N/A'
+      value: 'highscore: 99'
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontSize
-      value: 159.42
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColor.a
-      value: 0.023290759
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColor.b
@@ -600,16 +604,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontSizeBase
-      value: 159.42
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
+      propertyPath: m_overrideHtmlColors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColorGradientPreset
       value: 
-      objectReference: {fileID: 11400000, guid: 53b3e69b06569d04d9aefa8e8f9e0b35, type: 2}
+      objectReference: {fileID: 11400000, guid: c4a15f6d58e359344b60bdf56268a9c8, type: 2}
     - target: {fileID: 1775621410045177623, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1109,6 +1117,9 @@ MonoBehaviour:
   gameOverScoreField: {fileID: 729686751}
   gameOverScoreText: 'Your Score: '
   gameOverHighscoreField: {fileID: 277721418}
+  gameOverHighscoreText: 'Highscore: '
+  newHighscoreText: <gradient="Score">NEW </gradient>
+  newHighscoreField: {fileID: 0}
 --- !u!1001 &680593570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1172,7 +1183,7 @@ PrefabInstance:
     - target: {fileID: 1932435191314168370, guid: 15fe581d3b16cec4399d27f534caf83c, type: 3}
       propertyPath: m_fontColorGradientPreset
       value: 
-      objectReference: {fileID: 11400000, guid: 6c5dd9f714e41204fa9db011e08081eb, type: 2}
+      objectReference: {fileID: 11400000, guid: 9db7af05bf09dae4fb2c1a6588854e57, type: 2}
     - target: {fileID: 1932435191314168370, guid: 15fe581d3b16cec4399d27f534caf83c, type: 3}
       propertyPath: m_fontColorGradient.topLeft.b
       value: 0.7183737
@@ -1570,7 +1581,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 4ddacc6231e9c4642a025cb9abe81223, type: 2}
+  m_fontColorGradientPreset: {fileID: 11400000, guid: bbc11521270723349a1472b7ad0592b1, type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
@@ -1730,7 +1741,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 53b3e69b06569d04d9aefa8e8f9e0b35, type: 2}
+  m_fontColorGradientPreset: {fileID: 11400000, guid: c4a15f6d58e359344b60bdf56268a9c8, type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
@@ -1819,7 +1830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introTimer: 3
-  gameTimer: 3
+  gameTimer: 5
 --- !u!4 &1264752471
 Transform:
   m_ObjectHideFlags: 0
@@ -1866,7 +1877,7 @@ PrefabInstance:
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColorGradientPreset
       value: 
-      objectReference: {fileID: 11400000, guid: 53b3e69b06569d04d9aefa8e8f9e0b35, type: 2}
+      objectReference: {fileID: 11400000, guid: c4a15f6d58e359344b60bdf56268a9c8, type: 2}
     - target: {fileID: 1775621410045177623, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2279,7 +2290,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 4ddacc6231e9c4642a025cb9abe81223, type: 2}
+  m_fontColorGradientPreset: {fileID: 11400000, guid: bbc11521270723349a1472b7ad0592b1, type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
@@ -2562,7 +2573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6894375049122261081, guid: c0c04f63313c82a4d9aa88e463eece34, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7217282321453758333, guid: c0c04f63313c82a4d9aa88e463eece34, type: 3}
       propertyPath: m_Name
@@ -2768,7 +2779,7 @@ PrefabInstance:
     - target: {fileID: 1932435191314168370, guid: 15fe581d3b16cec4399d27f534caf83c, type: 3}
       propertyPath: m_fontColorGradientPreset
       value: 
-      objectReference: {fileID: 11400000, guid: 6c5dd9f714e41204fa9db011e08081eb, type: 2}
+      objectReference: {fileID: 11400000, guid: 9db7af05bf09dae4fb2c1a6588854e57, type: 2}
     - target: {fileID: 2722543237258380898, guid: 15fe581d3b16cec4399d27f534caf83c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2876,7 +2887,7 @@ PrefabInstance:
     - target: {fileID: 4757956826858161012, guid: 15fe581d3b16cec4399d27f534caf83c, type: 3}
       propertyPath: colorChangeTo
       value: 
-      objectReference: {fileID: 11400000, guid: cd929604cfc9f8149a20e2b12c953956, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f447f51840c7664187029bae185dc37, type: 2}
     - target: {fileID: 4757956826858161012, guid: 15fe581d3b16cec4399d27f534caf83c, type: 3}
       propertyPath: zeroCountClip
       value: 
@@ -2956,7 +2967,7 @@ PrefabInstance:
     - target: {fileID: 955424870879371506, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_fontColorGradientPreset
       value: 
-      objectReference: {fileID: 11400000, guid: 4ddacc6231e9c4642a025cb9abe81223, type: 2}
+      objectReference: {fileID: 11400000, guid: bbc11521270723349a1472b7ad0592b1, type: 2}
     - target: {fileID: 1775621410045177623, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

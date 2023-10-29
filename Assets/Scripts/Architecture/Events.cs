@@ -18,6 +18,7 @@ public static class Events
     public static event EventHandler OnIncreaseScore;
     public static event Action<int> OnScoreChanged;
     public static event Action<float> OnTimerChanged;
+    public static event EventHandler OnNewHighscore;
 
     // AudioManager
     public static event EventHandler OnBgmFadeOut;
@@ -81,6 +82,11 @@ public static class Events
     public static void TimerChanged(float timer)
     {
         OnTimerChanged?.Invoke(timer);
+    }
+
+    public static void NewHighscore()
+    {
+        OnNewHighscore?.Invoke(null, EventArgs.Empty);
     }
 
     // AudioManager

@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
+        TrySaveHighscore();
         IsGameOver = true;
         Events.FadeOutBgm();
         Events.GameEnd();
@@ -179,6 +180,25 @@ public class GameManager : MonoBehaviour
     private void Events_OnIncreaseScore(object sender, EventArgs e)
     {
         IncreaseScore();
+    }
+
+    private bool IsHighscore()
+    {
+        return Score > PlayerPrefs.GetInt("Highscore");
+    }
+
+    private void TrySaveHighscore()
+    {
+        if (IsHighscore())
+        {
+            Events.NewHighscore();
+            SaveHighscore();
+        }
+    }
+
+    private void SaveHighscore()
+    {
+        PlayerPrefs.SetInt("Highscore", Score);
     }
 
     #endregion

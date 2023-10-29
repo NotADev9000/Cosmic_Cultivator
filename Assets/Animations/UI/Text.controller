@@ -97,7 +97,7 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7538154746753567659}
-    m_Position: {x: 355, y: 195, z: 0}
+    m_Position: {x: 320, y: 190, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 6845507295232498988}
@@ -106,7 +106,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 130, y: 130, z: 0}
   m_EntryPosition: {x: 340, y: 20, z: 0}
-  m_ExitPosition: {x: 340, y: 190, z: 0}
+  m_ExitPosition: {x: 340, y: 250, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -2550344039927305363}
 --- !u!1101 &6845507295232498988
@@ -141,7 +141,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Text_Fade_In_Right
+  m_Name: Fade_In_Right
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

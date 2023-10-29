@@ -40,7 +40,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverScoreField;
     [SerializeField] private string gameOverScoreText = "Your Score: ";
     [SerializeField] private TMP_Text gameOverHighscoreField;
-    //[SerializeField] private string gameOverHighscoreText = "Highscore: ";
+    [SerializeField] private string gameOverHighscoreText = "Highscore: ";
+    [SerializeField] private string newHighscoreText = "<gradient=\"Score\">New </gradient>";
+    [SerializeField] private TMP_Text newHighscoreField;
 
     private string displayScore = "0";
 
@@ -64,6 +66,7 @@ public class UIManager : MonoBehaviour
         Events.OnGameEnd += Events_OnGameEnd;
         Events.OnGamePaused += Events_OnGamePaused;
         Events.OnGameUnpaused += Events_OnGameUnpaused;
+        Events.OnNewHighscore += Events_OnNewHighscore;
     }
 
     private void RemoveEvents()
@@ -73,6 +76,7 @@ public class UIManager : MonoBehaviour
         Events.OnGameEnd -= Events_OnGameEnd;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
+        Events.OnNewHighscore -= Events_OnNewHighscore;
     }
 
     #endregion
@@ -111,6 +115,11 @@ public class UIManager : MonoBehaviour
         pauseField.gameObject.SetActive(false);
     }
 
+    private void Events_OnNewHighscore(object sender, System.EventArgs e)
+    {
+        gameOverHighscoreText = newHighscoreText + gameOverHighscoreText;
+    }
+
     #endregion
     //--------------------
 
@@ -131,6 +140,7 @@ public class UIManager : MonoBehaviour
     private void SetGameoverFields()
     {
         gameOverScoreField.text = gameOverScoreText + displayScore;
+        gameOverHighscoreField.text = gameOverHighscoreText + PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     private IEnumerator PlayGameOverCutscene()
