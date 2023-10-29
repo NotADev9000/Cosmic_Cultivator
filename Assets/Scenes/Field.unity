@@ -257,6 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 171884650}
   - component: {fileID: 171884651}
+  - component: {fileID: 171884652}
   m_Layer: 5
   m_Name: Timeline
   m_TagString: Untagged
@@ -324,7 +325,38 @@ PlayableDirector:
   - key: {fileID: -2028412208222104923, guid: e82b4fd04d9945643be75ac60197d896, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
-    m_References: []
+    m_References:
+    - 269a08260a4cc324d96e7ae9fd428efe: {fileID: 1264752469}
+--- !u!114 &171884652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171884649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 7abe71b62a809b7479177d4c26f0d93f, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1264752470}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: set_CanResetGame
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &236403826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4506001339062189730, guid: 88d75f7c77351a54181eb6e2953fb92f, type: 3}
@@ -1786,7 +1818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introTimer: 3
-  gameTimer: 25
+  gameTimer: 15
 --- !u!4 &1264752471
 Transform:
   m_ObjectHideFlags: 0

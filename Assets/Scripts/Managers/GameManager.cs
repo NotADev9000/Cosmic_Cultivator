@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class GameManager : MonoBehaviour
     {
         get { return !IsGameOver && !IsGamePaused && IsGameStarted; }
     }
-    public bool IsGameOver { get; private set; } = false;
-    public bool IsGamePaused { get; private set; } = false;
-    public bool IsGameStarted { get; private set; } = false;
-    public bool IsIntroRunning { get; private set; } = false;
+    public bool IsIntroRunning { get; private set; } = false; // during intro countdown
+    public bool IsGameStarted { get; private set; } = false;  // game has started after intro
+    public bool IsGameOver { get; private set; } = false;     // game has ended
+    public bool IsGamePaused { get; private set; } = false;   // game has been paused
+    public bool CanResetGame { get; set; } = false;   // can reset game after: game over & ending menus
 
     // Game Management
     [SerializeField] private float introTimer = 3f;
@@ -102,6 +104,11 @@ public class GameManager : MonoBehaviour
         if (!IsGameStarted)
         {
             StartIntro();
+        } 
+        else if (IsGameOver)
+        {
+            Events.FadeOutBgm();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

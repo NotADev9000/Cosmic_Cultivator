@@ -57,8 +57,7 @@ public class AudioManager : MonoBehaviour
     private void Events_OnGameStart(object sender, System.EventArgs e)
     {
         audioSource_bgm.clip = gameBgmClip;
-        audioSource_bgm.time = 0;
-        audioSource_bgm.volume = 1;
+        ResetBgmClip();
         audioSource_bgm.Play();
     }
 
@@ -79,7 +78,7 @@ public class AudioManager : MonoBehaviour
     private void Events_OnGameOverCutsceneStarted(object sender, System.EventArgs e)
     {
         audioSource_bgm.clip = gameOverClip;
-        audioSource_bgm.volume = 1;
+        ResetBgmClip();
         audioSource_bgm.Play();
     }
 
@@ -104,6 +103,12 @@ public class AudioManager : MonoBehaviour
             source.volume = Mathf.Lerp(startVolume, targetVolume, secondsSinceFadeStarted / fadeDuration);
             yield return null;
         }
+    }
+
+    private void ResetBgmClip()
+    {
+        audioSource_bgm.time = 0;
+        audioSource_bgm.volume = 1;
     }
 
     private bool CreateSingleton()

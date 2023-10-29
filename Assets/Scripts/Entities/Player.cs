@@ -104,10 +104,10 @@ public class Player : MonoBehaviour
 
     private void RestartGame_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused)
+        if (GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused && GameManager.Instance.CanResetGame)
         {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            playerActions.Player_Map.RestartGame.performed -= RestartGame_performed;
+            Events.StartTransition();
         }
     }
 

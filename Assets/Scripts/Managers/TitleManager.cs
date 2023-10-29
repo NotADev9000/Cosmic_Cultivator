@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+    private bool HasPressedPlay = false;
+
     public void PlayPressed()
     {
-        Events.OnTransitionFinished += Events_OnTransitionFinished;
-        Events.StartTransition();
-        Events.FadeOutBgm();
+        if (!HasPressedPlay)
+        {
+            Events.OnTransitionFinished += Events_OnTransitionFinished;
+            Events.StartTransition();
+            Events.FadeOutBgm();
+            HasPressedPlay = true;
+        }
     }
 
     private void Events_OnTransitionFinished(object sender, System.EventArgs e)
