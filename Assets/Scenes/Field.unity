@@ -1830,7 +1830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introTimer: 3
-  gameTimer: 5
+  gameTimer: 45
 --- !u!4 &1264752471
 Transform:
   m_ObjectHideFlags: 0

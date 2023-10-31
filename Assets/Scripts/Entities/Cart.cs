@@ -41,7 +41,7 @@ public class Cart : MonoBehaviour
     {
         if (laserCollider == boxCollider)
         {
-            Events.CartHit();
+            Events.CartHit(transform);
             DoAudioAndVisuals();
             RemoveTarget();
             RemoveLaserHitListener();

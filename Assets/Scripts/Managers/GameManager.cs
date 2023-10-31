@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour
     public bool IsGameStarted { get; private set; } = false;  // game has started after intro
     public bool IsGameOver { get; private set; } = false;     // game has ended
     public bool IsGamePaused { get; private set; } = false;   // game has been paused
-    public bool CanResetGame { get; set; } = false;   // can reset game after: game over & ending menus
+    public bool CanResetGame { get; set; } = false;           // can reset game after: game over & ending menus
 
     // Game Management
     [SerializeField] private float introTimer = 3f;
     [SerializeField] private float gameTimer = 60f;
+    [SerializeField] private float increaseOnCarrierFilled = 1f; // how much the timer increases by when a carrier is filled up
     private float countdownTimer = 0f;
     public int Score { get; private set; } = 0;
 
@@ -66,8 +67,8 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        TrySaveHighscore();
         IsGameOver = true;
+        TrySaveHighscore();
         Events.FadeOutBgm();
         Events.GameEnd();
     }
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         Events.OnIncreaseScore += Events_OnIncreaseScore;
         Events.OnGamePaused += Events_OnGamePaused;
         Events.OnGameUnpaused += Events_OnGameUnpaused;
+        Events.OnCarrierFilled += Events_OnCarrierFilled;
     }
 
     private void RemoveEvents()
@@ -92,6 +94,7 @@ public class GameManager : MonoBehaviour
         Events.OnIncreaseScore -= Events_OnIncreaseScore;
         Events.OnGamePaused -= Events_OnGamePaused;
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
+        Events.OnCarrierFilled -= Events_OnCarrierFilled;
     }
 
     #endregion
@@ -125,6 +128,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    private void Events_OnCarrierFilled(object sender, EventArgs e)
+    {
+        AddToTimer(increaseOnCarrierFilled);
+    }
+
     #endregion
     //--------------------
 
@@ -141,16 +149,20 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                DecreaseTimer();
+                CountdownTimer();
             }
-
-            Events.TimerChanged(countdownTimer);
         }
     }
 
-    private void DecreaseTimer()
+    private void CountdownTimer()
     {
-        countdownTimer -= Time.deltaTime;
+        AddToTimer(-Time.deltaTime);
+    }
+
+    private void AddToTimer(float amount)
+    {
+        countdownTimer += amount;
+        Events.TimerChanged(countdownTimer);
     }
 
     private void OnTimerEnd()

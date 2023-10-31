@@ -49,7 +49,6 @@ public class Timer: MonoBehaviour
     [Tooltip("change color when timer is <= this value")]
     [SerializeField] private int changeColorAt = 5;
 
-
     [Space(5)]
 
     [Tooltip("minimum number of digits displayed during countdown")]

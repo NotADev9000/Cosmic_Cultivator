@@ -1,7 +1,7 @@
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class CowCarrier : MonoBehaviour
 {
@@ -13,7 +13,11 @@ public class CowCarrier : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private CardinalDirection moveDirection;
     [SerializeField] private bool isMoving = false;
-    [SerializeField] private int moveSpeed = 5;
+    [SerializeField] private int defaultMoveSpeed = 2;
+    [Tooltip("Move speed increase when all carts are filled")]
+    [SerializeField] private int fullSpeedAddition = 3;
+    //[Tooltip("Move speed when all carts are filled")]
+    //[SerializeField] private int fullSpeedSet = 5;
     private Vector3 moveDirectionVector;
 
     [Header("Carts")]
@@ -26,20 +30,28 @@ public class CowCarrier : MonoBehaviour
 
     [Header("Tractor")]
     [SerializeField] private Transform tractorVisual;
-    //[SerializeField] private SpriteRenderer tractorSprite;
-    //[SerializeField] private Transform particlePosition_Right;
-    //[SerializeField] private Transform particlePosition_Left;
-    //[SerializeField] private GameObject particleSmoke;
+
+    private int moveSpeed = 0;
+    private int noOfCarts = 0; // how many carts does this tractor have
+    private int noOfCows = 0; // how many cows have been given to this tractor
 
     private void OnEnable()
     {
+        AddEvents();
+        ResetCarrier();
         for (int i = 0; i < 3; i++)
         {
             Instantiate(cartPrefab, transform);
+            noOfCarts++;
         }
         childCarts = GetComponentsInChildren<Cart>();
         MoveDirection = Camera.main.WorldToViewportPoint(transform.position).x < 0 ? CardinalDirection.Right : CardinalDirection.Left;
         isMoving = true;
+    }
+
+    private void OnDisable()
+    {
+        RemoveEvents();
     }
 
     private void Update()
@@ -49,6 +61,32 @@ public class CowCarrier : MonoBehaviour
             transform.position += moveSpeed * Time.deltaTime * moveDirectionVector;
             CheckPathProgress();
         }
+    }
+
+    //--------------------
+    #region Set Events
+
+    private void AddEvents()
+    {
+        Events.OnCartHit += Events_OnCartHit;
+    }
+
+    private void RemoveEvents()
+    {
+        Events.OnCartHit -= Events_OnCartHit;
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Carrier Behavior
+
+    private void ResetCarrier()
+    {
+        moveSpeed = defaultMoveSpeed;
+        noOfCows = 0;
+        noOfCarts = 0;
     }
 
     private void SetMovementDirection(CardinalDirection value)
@@ -73,8 +111,35 @@ public class CowCarrier : MonoBehaviour
         ResetChildCartPositions();
     }
 
+    private void UpdateOnFull()
+    {
+        if (IsFull())
+        {
+            Events.CarrierFilled();
+            ChangeToFullMoveSpeed();
+        }
+    }
+
+    private void ChangeToFullMoveSpeed()
+    {
+        moveSpeed += fullSpeedAddition;
+        //moveSpeed = fullSpeedSet;
+    }
+
+    #endregion
+    //--------------------
+
     //--------------------
     #region Cart Handling
+
+    private void Events_OnCartHit(Transform cartTransform)
+    {
+        if (cartTransform.IsChildOf(transform))
+        {
+            IncreaseNoOfCows();
+            UpdateOnFull();
+        }
+    }
 
     private void ResetChildCartPositions()
     {
@@ -101,7 +166,24 @@ public class CowCarrier : MonoBehaviour
 
     private Cart GetLastChildCart()
     {
-        return childCarts[childCarts.Length - 1];
+        //return childCarts[childCarts.Length - 1];
+        return childCarts.Last();
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Cow Handling
+
+    private void IncreaseNoOfCows()
+    {
+        noOfCows++;
+    }
+
+    private bool IsFull()
+    {
+        return noOfCows >= noOfCarts;
     }
 
     #endregion

@@ -13,17 +13,19 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Spawn Position")]
     [SerializeField] private Transform spawnPositionsParent;
+    Transform[] openLanes;
+    Transform[] closedLanes;
     private int lastSpawnPositionIndex = -1; // index of last spawn position used. -1 if no spawn positions have been used
 
     private void Awake()
     {
         CreateSingleton();
+        Events.OnWaveIntervalTimerDepleted += WaveManager_OnIntervalTimerDepleted;
     }
 
     private void Start()
     {
         InstantiatePoolObjects();
-        Events.OnWaveIntervalTimerDepleted += WaveManager_OnIntervalTimerDepleted;
     }
 
     private void OnDestroy()

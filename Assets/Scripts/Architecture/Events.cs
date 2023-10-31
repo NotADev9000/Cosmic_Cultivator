@@ -20,6 +20,9 @@ public static class Events
     public static event Action<float> OnTimerChanged;
     public static event EventHandler OnNewHighscore;
 
+    // WaveManager
+    public static event EventHandler OnWaveIntervalTimerDepleted;
+
     // AudioManager
     public static event EventHandler OnBgmFadeOut;
 
@@ -33,8 +36,9 @@ public static class Events
     public static event EventHandler OnGamePaused;
     public static event EventHandler OnGameUnpaused;
 
-    // WaveManager
-    public static event EventHandler OnWaveIntervalTimerDepleted;
+    // Entities
+    public static event Action<Transform> OnCartHit;
+    public static event EventHandler OnCarrierFilled;
 
     #endregion
     //--------------------
@@ -89,6 +93,12 @@ public static class Events
         OnNewHighscore?.Invoke(null, EventArgs.Empty);
     }
 
+    // WaveManager
+    public static void WaveIntervalTimerDepleted()
+    {
+        OnWaveIntervalTimerDepleted?.Invoke(null, EventArgs.Empty);
+    }
+
     // AudioManager
 
     public static void FadeOutBgm()
@@ -127,15 +137,15 @@ public static class Events
     }
 
     // Entities
-    public static void CartHit()
+    public static void CartHit(Transform cartTransform)
     {
+        OnCartHit?.Invoke(cartTransform);
         OnIncreaseScore?.Invoke(null, EventArgs.Empty);
     }
 
-    // WaveManager
-    public static void WaveIntervalTimerDepleted()
+    public static void CarrierFilled()
     {
-        OnWaveIntervalTimerDepleted?.Invoke(null, EventArgs.Empty);
+        OnCarrierFilled?.Invoke(null, EventArgs.Empty);
     }
 
     #endregion

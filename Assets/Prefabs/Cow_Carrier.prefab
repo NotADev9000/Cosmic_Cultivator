@@ -4985,7 +4985,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: 3
   isMoving: 0
-  moveSpeed: 2
+  defaultMoveSpeed: 2
+  moveSpeedFull: 10
   cartOffset: 1.1
   cartOffscreenThreshold: 0.1
   cartPrefab: {fileID: 493830003426211657, guid: 2d0a918300d0808478b0446946630918, type: 3}
