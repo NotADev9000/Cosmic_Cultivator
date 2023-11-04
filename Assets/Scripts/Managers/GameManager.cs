@@ -6,7 +6,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    // Game Activity
+    // Game Data
+    [SerializeField] private float introTime = 3f;
+    [SerializeField] private float gameTime = 60f;
+
+    [Space(10)]
+
+    [SerializeField] private float increaseTimerOnCarrierFilled = 1f;
+
+    [Space(10)]
+
+    [SerializeField] private AnimationCurve noOfCartsCurve;
+    [SerializeField] private int minNoOfCarts = 1;
+    [SerializeField] private int maxNoOfCarts = 5;
+
+    // Game State
     public bool IsGameActive
     {
         get { return !IsGameOver && !IsGamePaused && IsGameStarted; }
@@ -16,13 +30,11 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;     // game has ended
     public bool IsGamePaused { get; private set; } = false;   // game has been paused
     public bool CanResetGame { get; set; } = false;           // can reset game after: game over & ending menus
-
+    
     // Game Management
-    [SerializeField] private float introTimer = 3f;
-    [SerializeField] private float gameTimer = 60f;
-    [SerializeField] private float increaseOnCarrierFilled = 1f; // how much the timer increases by when a carrier is filled up
     private float countdownTimer = 0f;
-    public int Score { get; private set; } = 0;
+    private float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } }
+    private int score = 0;
 
     private void Awake()
     {
@@ -47,12 +59,12 @@ public class GameManager : MonoBehaviour
     }
 
     //--------------------
-    #region Game Loop Management
+    #region Game State Management
 
     private void StartIntro()
     {
         IsIntroRunning = true;
-        countdownTimer = introTimer;
+        countdownTimer = introTime;
     }
 
     private void StartGame()
@@ -61,7 +73,7 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
         IsGamePaused = false;
         IsGameStarted = true;
-        countdownTimer = gameTimer;
+        countdownTimer = gameTime;
         Events.GameStart();
     }
 
@@ -130,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     private void Events_OnCarrierFilled(object sender, EventArgs e)
     {
-        AddToTimer(increaseOnCarrierFilled);
+        AddToTimer(increaseTimerOnCarrierFilled);
     }
 
     #endregion
@@ -185,8 +197,8 @@ public class GameManager : MonoBehaviour
 
     private void IncreaseScore()
     {
-        Score++;
-        Events.ScoreChanged(Score);
+        score++;
+        Events.ScoreChanged(score);
     }
 
     private void Events_OnIncreaseScore(object sender, EventArgs e)
@@ -196,7 +208,7 @@ public class GameManager : MonoBehaviour
 
     private bool IsHighscore()
     {
-        return Score > PlayerPrefs.GetInt("Highscore");
+        return score > PlayerPrefs.GetInt("Highscore");
     }
 
     private void TrySaveHighscore()
@@ -210,7 +222,19 @@ public class GameManager : MonoBehaviour
 
     private void SaveHighscore()
     {
-        PlayerPrefs.SetInt("Highscore", Score);
+        PlayerPrefs.SetInt("Highscore", score);
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Game Progression
+
+    public int GetNumberOfCarts()
+    {
+        float progress = noOfCartsCurve.Evaluate(TimerProgressNormalized);
+        return Mathf.CeilToInt(Mathf.Lerp(minNoOfCarts - 1, maxNoOfCarts, progress));
     }
 
     #endregion

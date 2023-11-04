@@ -39,6 +39,7 @@ public static class Events
     // Entities
     public static event Action<Transform> OnCartHit;
     public static event EventHandler OnCarrierFilled;
+    public static event Action<GameObject> OnObjectReadyToFinish;
 
     #endregion
     //--------------------
@@ -146,6 +147,11 @@ public static class Events
     public static void CarrierFilled()
     {
         OnCarrierFilled?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void CarrierEndOfPath(GameObject carrier)
+    {
+        OnObjectReadyToFinish?.Invoke(carrier);
     }
 
     #endregion

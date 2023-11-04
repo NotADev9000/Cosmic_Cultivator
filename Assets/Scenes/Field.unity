@@ -1115,10 +1115,10 @@ MonoBehaviour:
   gameOverTimeline: {fileID: 171884651}
   waitForBeforePlaying: 3
   gameOverScoreField: {fileID: 729686751}
-  gameOverScoreText: 'Your Score: '
+  gameOverScoreText: 'Your  Score:  '
   gameOverHighscoreField: {fileID: 277721418}
-  gameOverHighscoreText: 'Highscore: '
-  newHighscoreText: <gradient="Score">NEW </gradient>
+  gameOverHighscoreText: 'Highscore:  '
+  newHighscoreText: <gradient="Score">NEW!  </gradient>
   newHighscoreField: {fileID: 0}
 --- !u!1001 &680593570
 PrefabInstance:
@@ -1829,8 +1829,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792d9cfdd6ce8cf449b740e93168081f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introTimer: 3
-  gameTimer: 45
+  introTime: 3
+  gameTime: 60
+  increaseTimerOnCarrierFilled: 0
+  noOfCartsCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minNoOfCarts: 1
+  maxNoOfCarts: 5
 --- !u!4 &1264752471
 Transform:
   m_ObjectHideFlags: 0
