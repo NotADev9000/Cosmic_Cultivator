@@ -7,8 +7,13 @@ public class WaveManager : MonoBehaviour
     public static WaveManager Instance { get; private set; }
 
     [Header("Timer")]
-    [SerializeField] private float intervalTimer = 2f;
     [SerializeField] private float initialTimer = 0.5f;
+
+    [Space(5)]
+
+    [SerializeField] private AnimationCurve timerCurve;
+    [SerializeField] private float startIntervalTimer = 2f;
+    [SerializeField] private float endIntervalTimer = 0.5f;
 
     private float currentTimer;
 
@@ -43,7 +48,14 @@ public class WaveManager : MonoBehaviour
     private void OnEndOfTimer()
     {
         Events.WaveIntervalTimerDepleted();
-        currentTimer = intervalTimer;
+        currentTimer = GetTimer();
+        //print("INTERVAL: " + currentTimer.ToString());
+    }
+
+    private float GetTimer()
+    {
+        float progress = GameManager.Instance.EvaluateCurveFromTimerProgress(timerCurve);
+        return Mathf.Lerp(startIntervalTimer, endIntervalTimer, progress);
     }
 
     private void CreateSingleton()

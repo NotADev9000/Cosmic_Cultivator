@@ -136,7 +136,7 @@ public class CowCarrier : MonoBehaviour
 
     private float GetMoveSpeed()
     {
-        float progress = EvaluateCurveFromTimerProgress(speedCurve);
+        float progress = GameManager.Instance.EvaluateCurveFromTimerProgress(speedCurve);
         return Mathf.Lerp(baseMoveSpeed, maxMoveSpeed, progress);
     }
 
@@ -162,7 +162,7 @@ public class CowCarrier : MonoBehaviour
 
     private int GetNumberOfCarts()
     {
-        float progress = EvaluateCurveFromTimerProgress(noOfCartsCurve);
+        float progress = GameManager.Instance.EvaluateCurveFromTimerProgress(noOfCartsCurve);
         return Mathf.CeilToInt(Mathf.Lerp(minNoOfCarts - 1, maxNoOfCarts, progress));
     }
 
@@ -239,17 +239,6 @@ public class CowCarrier : MonoBehaviour
         float xPosInViewport = Camera.main.WorldToViewportPoint(lastChildCart.transform.position).x;
         // entirety of object is offscreen if last trailing cart X position (in the viewport) is > 1 or < 0
         return moveDirection == CardinalDirection.Right ? xPosInViewport > (1 + cartOffscreenThreshold) : xPosInViewport < (0 - cartOffscreenThreshold);
-    }
-
-    #endregion
-    //--------------------
-
-    //--------------------
-    #region General
-
-    private float EvaluateCurveFromTimerProgress(AnimationCurve curve)
-    {
-        return curve.Evaluate(GameManager.Instance.TimerProgressNormalized);
     }
 
     #endregion

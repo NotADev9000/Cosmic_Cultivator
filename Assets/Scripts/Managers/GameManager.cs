@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     
     // Game Management
     private float countdownTimer = 0f;
-    public float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } }
+    private float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } }
     private int score = 0;
 
     private void Awake()
@@ -77,6 +77,11 @@ public class GameManager : MonoBehaviour
         TrySaveHighscore();
         Events.FadeOutBgm();
         Events.GameEnd();
+    }
+
+    public float EvaluateCurveFromTimerProgress(AnimationCurve curve)
+    {
+        return curve.Evaluate(TimerProgressNormalized);
     }
 
     #endregion
