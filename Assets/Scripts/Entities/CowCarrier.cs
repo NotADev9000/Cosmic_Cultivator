@@ -11,20 +11,34 @@ public class CowCarrier : MonoBehaviour
         set { SetMovementDirection(value); }
     }
     [Header("Movement")]
-    [SerializeField] private CardinalDirection moveDirection;
     [SerializeField] private bool isMoving = false;
-    [SerializeField] private int defaultMoveSpeed = 2;
+    [SerializeField] private CardinalDirection moveDirection;
+
+    [Space(5)]
+
+    [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private float baseMoveSpeed = 2;
+    [SerializeField] private float maxMoveSpeed = 5;
     [Tooltip("Move speed increase when all carts are filled")]
     [SerializeField] private int fullSpeedAddition = 3;
 
     [Space(10)]
 
     [Header("Carts")]
+    [SerializeField] private Cart cartPrefab;
+
+    [Space(5)]
+
     [Tooltip("Size of the gap between Carrier and Cart")]
     [SerializeField] private float cartOffset = 1.2f;
     [Tooltip("How far last cart should be offscreen to be considered at 'end of path'")]
     [SerializeField] private float cartOffscreenThreshold = 0.1f;
-    [SerializeField] private Cart cartPrefab;
+
+    [Space(5)]
+
+    [SerializeField] private AnimationCurve noOfCartsCurve;
+    [SerializeField] private int minNoOfCarts = 1;
+    [SerializeField] private int maxNoOfCarts = 5;
 
     [Space(10)]
 
@@ -33,7 +47,7 @@ public class CowCarrier : MonoBehaviour
 
     private Cart[] childCarts = Array.Empty<Cart>();
     private Vector3 moveDirectionVector;
-    private int moveSpeed = 0;
+    private float moveSpeed = 0;
     private int noOfCarts = 0; // how many carts does this tractor have
     private int noOfCows = 0; // how many cows have been given to this tractor
 
@@ -84,7 +98,7 @@ public class CowCarrier : MonoBehaviour
 
     private void ResetCarrier()
     {
-        moveSpeed = defaultMoveSpeed;
+        moveSpeed = GetMoveSpeed();
         noOfCows = 0;
         noOfCarts = 0;
     }
@@ -120,6 +134,12 @@ public class CowCarrier : MonoBehaviour
         }
     }
 
+    private float GetMoveSpeed()
+    {
+        float progress = EvaluateCurveFromTimerProgress(speedCurve);
+        return Mathf.Lerp(baseMoveSpeed, maxMoveSpeed, progress);
+    }
+
     private void ChangeToFullMoveSpeed()
     {
         moveSpeed += fullSpeedAddition;
@@ -133,12 +153,17 @@ public class CowCarrier : MonoBehaviour
 
     private void InitCarts()
     {
-        int carts = GameManager.Instance.GetNumberOfCarts();
-        for (int i = 0; i < carts; i++)
+        for (int i = 0; i < GetNumberOfCarts(); i++)
         {
             Instantiate(cartPrefab, transform);
             noOfCarts++;
         }
+    }
+
+    private int GetNumberOfCarts()
+    {
+        float progress = EvaluateCurveFromTimerProgress(noOfCartsCurve);
+        return Mathf.CeilToInt(Mathf.Lerp(minNoOfCarts - 1, maxNoOfCarts, progress));
     }
 
     private void Events_OnCartHit(Transform cartTransform)
@@ -214,6 +239,17 @@ public class CowCarrier : MonoBehaviour
         float xPosInViewport = Camera.main.WorldToViewportPoint(lastChildCart.transform.position).x;
         // entirety of object is offscreen if last trailing cart X position (in the viewport) is > 1 or < 0
         return moveDirection == CardinalDirection.Right ? xPosInViewport > (1 + cartOffscreenThreshold) : xPosInViewport < (0 - cartOffscreenThreshold);
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region General
+
+    private float EvaluateCurveFromTimerProgress(AnimationCurve curve)
+    {
+        return curve.Evaluate(GameManager.Instance.TimerProgressNormalized);
     }
 
     #endregion

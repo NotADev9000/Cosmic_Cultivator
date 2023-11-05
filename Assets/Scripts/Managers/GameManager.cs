@@ -14,12 +14,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float increaseTimerOnCarrierFilled = 1f;
 
-    [Space(10)]
-
-    [SerializeField] private AnimationCurve noOfCartsCurve;
-    [SerializeField] private int minNoOfCarts = 1;
-    [SerializeField] private int maxNoOfCarts = 5;
-
     // Game State
     public bool IsGameActive
     {
@@ -33,7 +27,7 @@ public class GameManager : MonoBehaviour
     
     // Game Management
     private float countdownTimer = 0f;
-    private float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } }
+    public float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } }
     private int score = 0;
 
     private void Awake()
@@ -223,18 +217,6 @@ public class GameManager : MonoBehaviour
     private void SaveHighscore()
     {
         PlayerPrefs.SetInt("Highscore", score);
-    }
-
-    #endregion
-    //--------------------
-
-    //--------------------
-    #region Game Progression
-
-    public int GetNumberOfCarts()
-    {
-        float progress = noOfCartsCurve.Evaluate(TimerProgressNormalized);
-        return Mathf.CeilToInt(Mathf.Lerp(minNoOfCarts - 1, maxNoOfCarts, progress));
     }
 
     #endregion
