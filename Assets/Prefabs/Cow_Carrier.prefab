@@ -5010,8 +5010,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   baseMoveSpeed: 2
-  maxMoveSpeed: 5
-  secondsToReachMaxSpeed: 6
+  maxMoveSpeed: 4
+  secondsToReachMaxSpeed: 3
   fullSpeedAddition: 3
   cartPrefab: {fileID: 493830003426211657, guid: 2d0a918300d0808478b0446946630918, type: 3}
   cartOffset: 1.1
@@ -5029,10 +5029,37 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.7
+      time: 0.25
+      value: 0.27546996
+      inSlope: 1.1172386
+      outSlope: 1.1172386
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.48302
+      inSlope: 0.9226094
+      outSlope: 0.9226094
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.12372625
+    - serializedVersion: 3
+      time: 0.75515574
+      value: 0.7545783
+      inSlope: 1.4711213
+      outSlope: 1.4711213
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.20336701
+    - serializedVersion: 3
+      time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -5040,6 +5067,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  minNoOfCarts: 1
+  minNoOfCarts: 2
   maxNoOfCarts: 5
   tractorVisual: {fileID: 252817889248490985}

@@ -73,7 +73,7 @@ public class CowCarrier : MonoBehaviour
 
     private void Update()
     {
-        if (isMoving)
+        if (isMoving && !GameManager.Instance.IsGamePaused)
         {
             transform.position += currentMoveSpeed * Time.deltaTime * moveDirectionVector;
             UpdateAcceleration();

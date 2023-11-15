@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour
     private void Events_OnCarrierFilled(object sender, EventArgs e)
     {
         AddToTimer(increaseTimerOnCarrierFilled);
+        IncreaseScore();
     }
 
     #endregion
