@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip scoreIncreaseClip;
     [SerializeField] private AudioClip pauseClip;
     [SerializeField] private AudioClip unpauseClip;
+    [SerializeField] private AudioClip carrierFilledClip;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class AudioManager : MonoBehaviour
             Events.OnGameUnpaused += Events_OnGameUnpaused;
             Events.OnGameOverCutsceneStarted += Events_OnGameOverCutsceneStarted;
             Events.OnBgmFadeOut += Events_OnBgmFadeOut;
+            Events.OnCarrierFilled += Events_OnCarrierFilled;
         }
     }
 
@@ -47,6 +50,7 @@ public class AudioManager : MonoBehaviour
         Events.OnGameUnpaused -= Events_OnGameUnpaused;
         Events.OnGameOverCutsceneStarted -= Events_OnGameOverCutsceneStarted;
         Events.OnBgmFadeOut -= Events_OnBgmFadeOut;
+        Events.OnCarrierFilled -= Events_OnCarrierFilled;
     }
 
     private void Events_OnMenuButtonPressed(object sender, System.EventArgs e)
@@ -88,6 +92,11 @@ public class AudioManager : MonoBehaviour
         audioSource_bgm.clip = gameOverClip;
         ResetBgmClip();
         audioSource_bgm.Play();
+    }
+
+    private void Events_OnCarrierFilled(object sender, EventArgs e)
+    {
+        audioSource_sfx.PlayOneShot(carrierFilledClip);
     }
 
     private void Events_OnBgmFadeOut(object sender, System.EventArgs e)

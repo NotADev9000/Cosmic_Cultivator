@@ -16,14 +16,9 @@ public class Cart_Audio : MonoBehaviour
 
     public void OnCowAppear()
     {
-        audioSource.pitch = Random.Range(0.75f, 1.55f);
-
         int clipIndex = Random.Range(0, cowClipsList.Count);
         AudioClip clipToPlay = cowClipsList[clipIndex];
-
         PlayAudioOneShot(clipToPlay);
-
-        audioSource.pitch = 1;
     }
 
     public void PlayAudioOneShot(AudioClip clipToPlay)

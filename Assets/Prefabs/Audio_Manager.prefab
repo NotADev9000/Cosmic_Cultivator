@@ -54,6 +54,7 @@ MonoBehaviour:
   scoreIncreaseClip: {fileID: 8300000, guid: 0b5ead73c511072429da8e84b4c85666, type: 3}
   pauseClip: {fileID: 8300000, guid: fa42c173266e7064f8080105e8da0768, type: 3}
   unpauseClip: {fileID: 8300000, guid: 340f8b916b2ed1446b2126079dd941c5, type: 3}
+  carrierFilledClip: {fileID: 8300000, guid: 32e5ceacb77ad154981c70e82a337d97, type: 3}
 --- !u!82 &4558815545337172925
 AudioSource:
   m_ObjectHideFlags: 0
