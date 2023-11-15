@@ -5011,6 +5011,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   baseMoveSpeed: 2
   maxMoveSpeed: 5
+  secondsToReachMaxSpeed: 6
   fullSpeedAddition: 3
   cartPrefab: {fileID: 493830003426211657, guid: 2d0a918300d0808478b0446946630918, type: 3}
   cartOffset: 1.1

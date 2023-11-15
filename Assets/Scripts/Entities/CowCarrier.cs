@@ -19,6 +19,7 @@ public class CowCarrier : MonoBehaviour
     [SerializeField] private AnimationCurve speedCurve;
     [SerializeField] private float baseMoveSpeed = 2;
     [SerializeField] private float maxMoveSpeed = 5;
+    [SerializeField] private float secondsToReachMaxSpeed = 1;
     [Tooltip("Move speed increase when all carts are filled")]
     [SerializeField] private int fullSpeedAddition = 3;
 
@@ -47,7 +48,9 @@ public class CowCarrier : MonoBehaviour
 
     private Cart[] childCarts = Array.Empty<Cart>();
     private Vector3 moveDirectionVector;
-    private float moveSpeed = 0;
+    private float targetMoveSpeed = 0;
+    private float currentMoveSpeed = 0;
+    private float elapsedAccelTime = 0;
     private int noOfCarts = 0; // how many carts does this tractor have
     private int noOfCows = 0; // how many cows have been given to this tractor
 
@@ -72,7 +75,8 @@ public class CowCarrier : MonoBehaviour
     {
         if (isMoving)
         {
-            transform.position += moveSpeed * Time.deltaTime * moveDirectionVector;
+            transform.position += currentMoveSpeed * Time.deltaTime * moveDirectionVector;
+            UpdateAcceleration();
             UpdatePathProgress();
         }
     }
@@ -98,7 +102,7 @@ public class CowCarrier : MonoBehaviour
 
     private void ResetCarrier()
     {
-        moveSpeed = GetMoveSpeed();
+        targetMoveSpeed = currentMoveSpeed = GetMoveSpeed();
         noOfCows = 0;
         noOfCarts = 0;
     }
@@ -142,7 +146,21 @@ public class CowCarrier : MonoBehaviour
 
     private void ChangeToFullMoveSpeed()
     {
-        moveSpeed += fullSpeedAddition;
+        targetMoveSpeed += fullSpeedAddition;
+    }
+
+    private void UpdateAcceleration()
+    {
+        if (currentMoveSpeed < targetMoveSpeed)
+        {
+            elapsedAccelTime += Time.deltaTime;
+            currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, targetMoveSpeed, elapsedAccelTime / secondsToReachMaxSpeed);
+        }
+        else
+        {
+            currentMoveSpeed = targetMoveSpeed;
+            elapsedAccelTime = 0;
+        }
     }
 
     #endregion

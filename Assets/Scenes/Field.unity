@@ -3168,6 +3168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn_Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3345527555925629875, guid: 136fea82c57fa5c4db0e145fc06a51bb, type: 3}
+      propertyPath: numObjectsToPool
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
