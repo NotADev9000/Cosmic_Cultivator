@@ -7,11 +7,18 @@ public class TitleManager : MonoBehaviour
 {
     private bool HasPressedPlay = false;
 
-    public void PlayPressed()
+    public void ButtonPressed()
     {
         if (!HasPressedPlay)
         {
             Events.MenuButtonPressed();
+        }
+    }
+
+    public void PlayPressed()
+    {
+        if (!HasPressedPlay)
+        {
             Events.OnTransitionFinished += Events_OnTransitionFinished;
             Events.StartTransition(true);
             Events.FadeOutBgm();
