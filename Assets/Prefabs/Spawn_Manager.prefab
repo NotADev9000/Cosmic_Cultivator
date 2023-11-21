@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToPool: {fileID: 9157973877624571146, guid: 7f6cc4d3fac090441a8c2436e46e3fde, type: 3}
-  numObjectsToPool: 6
+  numObjectsToPool: 10
   spawnPositionsParent: {fileID: 7594101054158443671}
 --- !u!1 &8194220159701418701
 GameObject:

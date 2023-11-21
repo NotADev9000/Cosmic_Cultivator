@@ -2506,94 +2506,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave_Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: startIntervalTimer
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].time
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[2].time
-      value: 0.30057257
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[3].time
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].value
-      value: 0.16075031
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[2].value
-      value: 0.2297375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[3].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[0].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].inSlope
-      value: 0.19790852
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[2].inSlope
-      value: 0.50242203
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[3].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[0].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].outSlope
-      value: 0.19790852
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[2].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[2].outSlope
-      value: 0.50242203
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[3].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[2].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692666446718771681, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
-      propertyPath: timerCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4849322324766222542, guid: f7cd879cab958e449b3bf684d3a652b8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3219,10 +3131,6 @@ PrefabInstance:
     - target: {fileID: 2996062867362051543, guid: 136fea82c57fa5c4db0e145fc06a51bb, type: 3}
       propertyPath: m_Name
       value: Spawn_Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3345527555925629875, guid: 136fea82c57fa5c4db0e145fc06a51bb, type: 3}
-      propertyPath: numObjectsToPool
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
