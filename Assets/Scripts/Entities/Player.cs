@@ -7,15 +7,23 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
     private PlayerActions playerActions;
 
+    //------------------------------------------------------------------
+
     [Header("Movement")]
     [SerializeField] private int moveSpeed = 10;
     public Vector2 MoveDirection { get; private set; }
 
+    //------------------------------------------------------------------
+    [Space(10)]
+
     [Header("Laser")]
     [SerializeField] private float laserRadius = 3f;
 
-    // Events
+    //------------------------------------------------------------------
+
     public event Action<Collider2D> OnLaserShotAction;
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {
@@ -35,10 +43,21 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
+        RemoveEvents();
+    }
+
+    //--------------------
+    #region Set Events
+
+    private void RemoveEvents()
+    {
         playerActions.Player_Map.Laser.performed -= Laser_performed;
         playerActions.Player_Map.RestartGame.performed -= RestartGame_performed;
         playerActions.Player_Map.PauseGame.performed -= PauseGame_performed;
     }
+
+    #endregion
+    //--------------------
 
     //--------------------
     #region Movement

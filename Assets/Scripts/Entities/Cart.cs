@@ -13,14 +13,19 @@ public class Cart : MonoBehaviour
     [Tooltip("Distance between each cart behind a tractor")]
     [SerializeField] private float cartGap = 0.2f;
 
+    //------------------------------------------------------------------
     [Space(10)]
 
     [Header("Audio")]
     [SerializeField] private Cart_Audio cartAudio;
 
+    //------------------------------------------------------------------
+
     private Collider2D boxCollider;
     public float CartWidth { get { return wagonVisual.bounds.size.x + cartGap; } }
     public float CartHeight { get { return wagonVisual.bounds.size.y + cartGap; } }
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {
@@ -29,13 +34,32 @@ public class Cart : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.Instance.OnLaserShotAction += Player_OnLaserShotCheck;
+        AddEvents();
     }
 
     private void OnDisable()
     {
-        RemoveLaserHitListener();
+        RemoveEvents();
     }
+
+    //--------------------
+    #region Set Events
+
+    private void AddEvents()
+    {
+        Player.Instance.OnLaserShotAction += Player_OnLaserShotCheck;
+    }
+
+    private void RemoveEvents()
+    {
+        Player.Instance.OnLaserShotAction -= Player_OnLaserShotCheck;
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Laser
 
     private void Player_OnLaserShotCheck(Collider2D laserCollider)
     {
@@ -44,14 +68,8 @@ public class Cart : MonoBehaviour
             Events.CartHit(transform);
             DoAudioAndVisuals();
             RemoveTarget();
-            RemoveLaserHitListener();
+            RemoveEvents();
         }
-    }
-
-    private void DoAudioAndVisuals()
-    {
-        cartAnimator.OnLaserHit();
-        cartAudio.OnCowAppear();
     }
 
     private void RemoveTarget()
@@ -59,8 +77,19 @@ public class Cart : MonoBehaviour
         boxCollider.enabled = false;
     }
 
-    private void RemoveLaserHitListener()
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Audio & Visuals
+
+    private void DoAudioAndVisuals()
     {
-        Player.Instance.OnLaserShotAction -= Player_OnLaserShotCheck;
+        cartAnimator.OnLaserHit();
+        cartAudio.OnCowAppear();
     }
+
+    #endregion
+    //--------------------
+
 }

@@ -23,6 +23,7 @@ public class CowCarrier : MonoBehaviour
     [Tooltip("Move speed increase when all carts are filled")]
     [SerializeField] private int fullSpeedAddition = 3;
 
+    //------------------------------------------------------------------
     [Space(10)]
 
     [Header("Carts")]
@@ -41,10 +42,13 @@ public class CowCarrier : MonoBehaviour
     [SerializeField] private int minNoOfCarts = 1;
     [SerializeField] private int maxNoOfCarts = 5;
 
+    //------------------------------------------------------------------
     [Space(10)]
 
     [Header("Tractor")]
     [SerializeField] private Transform tractorVisual;
+
+    //------------------------------------------------------------------
 
     private Cart[] childCarts = Array.Empty<Cart>();
     private Vector3 moveDirectionVector;
@@ -53,6 +57,8 @@ public class CowCarrier : MonoBehaviour
     private float elapsedAccelTime = 0;
     private int noOfCarts = 0; // how many carts does this tractor have
     private int noOfCows = 0; // how many cows have been given to this tractor
+
+    //------------------------------------------------------------------
 
     private void OnEnable()
     {

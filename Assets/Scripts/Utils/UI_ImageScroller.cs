@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class UI_ImageScroller : MonoBehaviour
 {
-    private RawImage img;
     [SerializeField] private float xSpeed, ySpeed;
+
+    //------------------------------------------------------------------
+
+    private RawImage img;
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {
@@ -20,8 +25,15 @@ public class UI_ImageScroller : MonoBehaviour
         img.uvRect = new Rect(x, y, img.uvRect.width, img.uvRect.height);
     }
 
+    //--------------------
+    #region Scroll
+
     private float GetDistanceScrolled(float speed)
     {
         return speed * Time.deltaTime;
     }
+
+    #endregion
+    //--------------------
+
 }

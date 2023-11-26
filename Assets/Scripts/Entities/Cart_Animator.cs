@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Cart_Animator : MonoBehaviour
 {
+    [Header("Cow")]
     [SerializeField] private GameObject cowChild;
+
+    //------------------------------------------------------------------
+    [Space(10)]
 
     [Header("Animation Audio")]
     [SerializeField] private Cart_Audio cartAudio;
     [SerializeField] private AudioClip impactClip;
+
+    //------------------------------------------------------------------
 
     private Animator animator;
 
@@ -17,12 +23,29 @@ public class Cart_Animator : MonoBehaviour
     private const string ANIMATION_TRIGGER_COW_APPEAR = "Cow_Appear";
     private const string ANIMATION_BOOL_COW_MIRROR = "Cow_Idle_Mirror";
 
+    //------------------------------------------------------------------
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         SetupCartIdleAnimation();
         SetupCowIdleAnimation();
     }
+
+    //--------------------
+    #region Interaction
+
+    public void OnLaserHit()
+    {
+        cowChild.SetActive(true);
+        animator.SetTrigger(ANIMATION_TRIGGER_COW_APPEAR);
+    }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Animation Prep
 
     private void SetupCartIdleAnimation()
     {
@@ -35,11 +58,8 @@ public class Cart_Animator : MonoBehaviour
         animator.SetBool(ANIMATION_BOOL_COW_MIRROR, setBool);
     }
 
-    public void OnLaserHit()
-    {
-        cowChild.SetActive(true);
-        animator.SetTrigger(ANIMATION_TRIGGER_COW_APPEAR);
-    }
+    #endregion
+    //--------------------
 
     //--------------------
     #region Animation Audio

@@ -7,12 +7,19 @@ public class Cart_Audio : MonoBehaviour
     [Header("Cow")]
     [SerializeField] private List<AudioClip> cowClipsList = new List<AudioClip>();
 
+    //------------------------------------------------------------------
+
     private AudioSource audioSource;
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
+
+    //--------------------
+    #region Events Activation
 
     public void OnCowAppear()
     {
@@ -21,8 +28,18 @@ public class Cart_Audio : MonoBehaviour
         PlayAudioOneShot(clipToPlay);
     }
 
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Audio
+
     public void PlayAudioOneShot(AudioClip clipToPlay)
     {
         audioSource.PlayOneShot(clipToPlay);
     }
+
+    #endregion
+    //--------------------
+
 }
