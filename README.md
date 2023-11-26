@@ -9,3 +9,5 @@ https://notadev9000.itch.io/cosmic-cultivator
 ![Cosmic Cultivator Instructions](https://i.ibb.co/mXCBjyB/Title-1.png)
 ![Alien gifting a Cow](https://i.ibb.co/X7JxK2z/Game-1.png)
 ![Alien chasing Tractors](https://i.ibb.co/yhhqJ5P/Game-2.png)
+
+<img src="https://i.ibb.co/mXCBjyB/Title-1.png" height="720">
