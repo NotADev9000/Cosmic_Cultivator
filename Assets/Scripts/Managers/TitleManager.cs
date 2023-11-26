@@ -7,6 +7,11 @@ public class TitleManager : MonoBehaviour
 {
     private bool HasPressedPlay = false;
 
+    //------------------------------------------------------------------
+
+    //--------------------
+    #region UI Interaction
+
     public void ButtonPressed()
     {
         if (!HasPressedPlay)
@@ -26,9 +31,19 @@ public class TitleManager : MonoBehaviour
         }
     }
 
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Events Activation
+
     private void Events_OnTransitionFinished(object sender, System.EventArgs e)
     {
         Events.OnTransitionFinished -= Events_OnTransitionFinished;
         SceneManager.LoadScene(1);
     }
+
+    #endregion
+    //--------------------
+
 }

@@ -44,7 +44,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private string newHighscoreText = "<gradient=\"Score\">New </gradient>";
     [SerializeField] private TMP_Text newHighscoreField;
 
+    //------------------------------------------------------------------
+
     private string displayScore = "0";
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {

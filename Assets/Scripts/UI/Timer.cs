@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class Timer: MonoBehaviour
 {
+    [Header("Timer Behaviour")]
     [Tooltip("Is the timer active")]
     public bool isRunning = false;
 
     //----------------------------------------------------------
+    [Space(10)]
+
     [Header("Animation")]
     [Tooltip("Should the timer animate when <= a particular value")]
     [SerializeField] private bool shouldAnimate = true;
     [Tooltip("Animates the timer when it is <= this value")]
     [SerializeField] private int pulseAt = 5;
 
+    //------------------------------------------------------------------
     [Space(10)]
 
-    //----------------------------------------------------------
     [Header("Sounds")]
     [SerializeField] private bool playSoundWhenLow = true;
     [SerializeField] private bool playSoundOnZero = true;
@@ -29,9 +32,9 @@ public class Timer: MonoBehaviour
     [SerializeField] private AudioClip lowCountClip;
     [SerializeField] private AudioClip zeroCountClip;
 
+    //------------------------------------------------------------------
     [Space(10)]
 
-    //----------------------------------------------------------
     [Header("Text")]
     [SerializeField] private TMP_Text textField;
 
@@ -54,7 +57,8 @@ public class Timer: MonoBehaviour
     [Tooltip("minimum number of digits displayed during countdown")]
     [SerializeField] private int numberOfDigits = 1;
 
-    //----------------------------------------------------------
+    //------------------------------------------------------------------
+
     private const string ANIMATION_TRIGGER_PULSE = "Pulse";
     private const string ANIMATION_TRIGGER_PULSEFADE = "PulseFade";
 
@@ -63,7 +67,8 @@ public class Timer: MonoBehaviour
     private Animator animator;
     private AudioSource audioSource;
 
-    //----------------------------------------------------------
+    //------------------------------------------------------------------
+
     private void Awake()
     {
         AddEvents();

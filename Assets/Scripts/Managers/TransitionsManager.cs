@@ -4,22 +4,45 @@ using UnityEngine;
 
 public class TransitionsManager : MonoBehaviour
 {
-    [SerializeField] float delayAmount = 0.2f;
+    [SerializeField] float delayAmount = 0.2f; // delay transition before activating
+
+    //------------------------------------------------------------------
 
     private Animator animator;
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        Events.OnStartTransition += Events_OnStartTransition;
-        Events.OnEndTransition += Events_OnEndTransition;
+        AddEvents();
     }
 
     private void OnDestroy()
     {
+        RemoveEvents();
+    }
+
+    //--------------------
+    #region Set Events
+
+    private void AddEvents()
+    {
+        Events.OnStartTransition += Events_OnStartTransition;
+        Events.OnEndTransition += Events_OnEndTransition;
+    }
+
+    private void RemoveEvents()
+    {
         Events.OnStartTransition -= Events_OnStartTransition;
         Events.OnEndTransition -= Events_OnEndTransition;
     }
+
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Events Activation
 
     private void Events_OnStartTransition(bool delayTransition)
     {
@@ -31,6 +54,12 @@ public class TransitionsManager : MonoBehaviour
         StartCoroutine(ActivateTransition("End", delayTransition));
     }
 
+    #endregion
+    //--------------------
+
+    //--------------------
+    #region Transition Behaviour
+
     private IEnumerator ActivateTransition(string transitionType, bool delayTransition)
     {
         if (delayTransition) yield return new WaitForSeconds(delayAmount);
@@ -41,4 +70,8 @@ public class TransitionsManager : MonoBehaviour
     {
         Events.TransitionFinished();
     }
+
+    #endregion
+    //--------------------
+
 }

@@ -6,21 +6,27 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { get; private set; }
 
+    //------------------------------------------------------------------
+
     [Header("Object Pooling")]
     [SerializeField] private GameObject prefabToPool;
     [SerializeField] private int numObjectsToPool = 10;
     private Queue<GameObject> objectPool = new Queue<GameObject>();
+
+    //------------------------------------------------------------------
+    [Space(10)]
 
     [Header("Spawn Position")]
     [SerializeField] private Transform spawnPositionsParent;
     private List<Transform> openLanes = new List<Transform>(), 
                             closedLanes = new List<Transform>();
 
+    //------------------------------------------------------------------
+
     private void Awake()
     {
         CreateSingleton();
-        Events.OnWaveIntervalTimerDepleted += Events_OnIntervalTimerDepleted;
-        Events.OnObjectReadyToFinish += Events_ObjectReadyToFinish;
+        AddEvents();
     }
 
     private void Start()
@@ -31,9 +37,26 @@ public class SpawnManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        RemoveEvents();
+    }
+
+    //--------------------
+    #region Set Events
+
+    private void AddEvents()
+    {
+        Events.OnWaveIntervalTimerDepleted += Events_OnIntervalTimerDepleted;
+        Events.OnObjectReadyToFinish += Events_ObjectReadyToFinish;
+    }
+
+    private void RemoveEvents()
+    {
         Events.OnWaveIntervalTimerDepleted -= Events_OnIntervalTimerDepleted;
         Events.OnObjectReadyToFinish -= Events_ObjectReadyToFinish;
     }
+
+    #endregion
+    //--------------------
 
     //--------------------
     #region Events Activation

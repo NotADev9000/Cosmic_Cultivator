@@ -6,33 +6,40 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    // Game Data
+    [Header("All Timers")]
     [SerializeField] private float introTime = 3f;
     [SerializeField] private float gameTime = 60f;
 
+    //------------------------------------------------------------------
     [Space(10)]
 
+    [Header("Gameplay")]
     [SerializeField] private float increaseTimerOnCarrierFilled = 1f;
+
+    //------------------------------------------------------------------
 
     // Game State
     public bool IsGameActive
     {
         get { return !IsGameOver && !IsGamePaused && IsGameStarted; }
     }
-    public bool IsIntroRunning { get; private set; } = false; // during intro countdown
+    public bool IsIntroRunning { get; private set; } = false; // during intro countdown timer
     public bool IsGameStarted { get; private set; } = false;  // game has started after intro
-    public bool IsGameOver { get; private set; } = false;     // game has ended
-    public bool IsGamePaused { get; private set; } = false;   // game has been paused
-    public bool CanResetGame { get; set; } = false;           // can reset game after: game over & ending menus
-    
+    public bool IsGameOver { get; private set; } = false;
+    public bool IsGamePaused { get; private set; } = false;
+    public bool CanResetGame { get; set; } = false;           // restart button can be pressed
+
+    //------------------------------------------------------------------
+
     // Game Management
     private float countdownTimer = 0f;
-    private float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } }
+    private float TimerProgressNormalized { get { return 1 - (countdownTimer/gameTime); } } // How much timer has counted down, ranging from 0 (no progress) to 1 (complete)
     private int score = 0;
+
+    //------------------------------------------------------------------
 
     private void Awake()
     {
-        LimitFPS();
         CreateSingleton();
         AddEvents();
     }
@@ -79,6 +86,12 @@ public class GameManager : MonoBehaviour
         Events.GameEnd();
     }
 
+    /// <summary>
+    /// Method - Evaluates completion of an animation curve based on how far main game countdown has progressed.
+    ///          Used to track and progress the difficulty curve of the game (Carrier spawning, speed and number of carts)
+    /// </summary>
+    /// <param name="curve">The animation curve to evaluate</param>
+    /// <returns>The value of the curve at current countdown progress</returns>
     public float EvaluateCurveFromTimerProgress(AnimationCurve curve)
     {
         return curve.Evaluate(TimerProgressNormalized);
@@ -227,12 +240,6 @@ public class GameManager : MonoBehaviour
 
     #endregion
     //--------------------
-
-    private void LimitFPS()
-    {
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 0;
-    }
 
     private void CreateSingleton()
     {
