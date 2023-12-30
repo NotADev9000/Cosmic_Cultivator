@@ -1,4 +1,13 @@
 Art:
-Alien & BG: Kenney.nl
-Wagon: Flaticon
-HAVE TO POST THIS LINK ON ITCH: <a href="https://www.flaticon.com/free-icons/train" title="train icons">Train icons created by Freepik - Flaticon</a>
+Alien & Cow: Kenney.nl
+Background: Kenney.nl
+Effects: Kenney.nl
+Fonts: Kenney.nl
+Tractor: Twemoji (Copyright 2018 Twitter, Inc and other contributors
+Graphics licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/)
+Wagon: Flaticon: <a href="https://www.flaticon.com/free-icons/train" title="train icons">Wagon icon created by Freepik - Flaticon</a>
+
+Audio:
+Title Music: Steppin Up - Macro
+Game Music: Happy - Rezoner
+GameOver Music: Arcade-Puzzler - soundimage.org
